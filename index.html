@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Para a minha Iasmim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --rosa: #ff4d8d;
+    --rosa-suave: #ff8fb3;
+    --rosa-claro: #ffd6e5;
+    --rosa-bebe: #ffeaf2;
+    --vinho: #8a1c45;
+    --texto: #5a2140;
+    --fundo1: #fff0f6;
+    --fundo2: #ffe3ef;
+    --dourado: #e8b75a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    color: var(--texto);
+    background: linear-gradient(160deg, var(--fundo1), var(--fundo2), #fff5f0);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  ::selection { background: var(--rosa); color: #fff; }
+
+  h1, h2, h3 { font-family: "Playfair Display", serif; }
+
+  /* ================= PRELOADER ================= */
+  #preloader {
+    position: fixed; inset: 0; z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: linear-gradient(160deg, #ffe3ef, #ffd6e5);
+    transition: opacity .8s ease, visibility .8s ease;
+  }
+  #preloader.escondido { opacity: 0; visibility: hidden; }
+  .coracao-preloader {
+    width: 60px; height: 60px; position: relative;
+    animation: bater 1s infinite ease-in-out;
+  }
+  .coracao-preloader:before, .coracao-preloader:after {
+    content: ""; position: absolute; width: 60px; height: 96px;
+    background: var(--rosa); border-radius: 60px 60px 0 0;
+    top: 0;
+  }
+  .coracao-preloader:before { left: 15px; transform: rotate(-45deg); transform-origin: 0 100%; }
+  .coracao-preloader:after  { left: -15px; transform: rotate(45deg); transform-origin: 100% 100%; }
+  @keyframes bater { 0%,100% { transform: scale(1);} 30% { transform: scale(1.25);} }
+  .texto-preloader { margin-top: 24px; font-family: "Dancing Script", cursive; font-size: 1.8rem; color: var(--vinho); }
+  .barrinha { margin-top: 12px; width: 160px; height: 6px; border-radius: 6px; background: #fff; overflow: hidden; }
+  .barrinha span { display: block; height: 100%; width: 0%; background: var(--rosa); border-radius: 6px; animation: carregar 1.6s ease forwards; }
+  @keyframes carregar { to { width: 100%; } }
+
+  /* ================= FUNDO FLUTUANTE ================= */
+  #coracoes {
+    position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0;
+  }
+  .coracao-flutuante {
+    position: absolute; bottom: -60px;
+    color: var(--rosa-suave); opacity: .35;
+    animation: subir linear infinite;
+  }
+  .coracao-flutuante:nth-child(even) { color: var(--rosa); opacity: .25; }
+  @keyframes subir {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); }
+    100% { transform: translateY(-110vh) rotate(45deg) scale(.6); }
+  }
+
+  /* ================= CONTEUDO ================= */
+  .conteudo { position: relative; z-index: 1; }
+
+  section { padding: 90px 20px; position: relative; }
+  .max { max-width: 950px; margin: 0 auto; }
+
+  .tag {
+    display: inline-block;
+    padding: 8px 20px; border-radius: 100px;
+    background: rgba(255,255,255,.6);
+    border: 1px solid var(--rosa-claro);
+    font-size: .85rem; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--rosa); font-weight: 500;
+    box-shadow: 0 8px 24px rgba(255,77,141,.08);
+  }
+  .titulo-sessao {
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    color: var(--vinho); margin: 14px 0 10px;
+  }
+  .subtitulo-sessao { color: #b06a8a; font-weight: 300; max-width: 620px; margin: 0 auto; }
+  .centro { text-align: center; }
+
+  /* ================= BOTAO MUSICA ================= */
+  #botaoMusica {
+    position: fixed; top: 18px; right: 18px; z-index: 60;
+    width: 52px; height: 52px; border-radius: 50%;
+    border: none; cursor: pointer;
+    background: rgba(255,255,255,.75);
+    box-shadow: 0 10px 30px rgba(255,77,141,.25);
+    backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .2s;
+  }
+  #botaoMusica:hover { transform: scale(1.1); }
+  #botaoMusica svg { width: 24px; height: 24px; fill: var(--rosa); }
+  #botaoMusica.mudo svg { fill: #999; animation: none; }
+
+  /* ================= HERO ================= */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,255,255,.7), transparent),
+      radial-gradient(ellipse 50% 40% at 85% 90%, rgba(255,143,179,.35), transparent),
+      radial-gradient(ellipse 50% 40% at 10% 85%, rgba(232,183,90,.25), transparent);
+  }
+  .badge-data {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 22px; border-radius: 100px;
+    background: #fff; box-shadow: 0 12px 34px rgba(255,77,141,.18);
+    color: var(--rosa); font-size: .9rem; letter-spacing: .14em;
+    text-transform: uppercase; font-weight: 500;
+    opacity: 0; animation: surgir 1s .2s forwards;
+  }
+  .badge-data .ponto { color: var(--dourado); }
+  .aniversariante-saudacao {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    color: #d46a94; margin: 26px 0 4px;
+    opacity: 0; animation: surgir 1s .5s forwards;
+  }
+  .nome-grande {
+    font-family: "Dancing Script", cursive;
+    font-size: clamp(4rem, 11vw, 7rem);
+    line-height: 1.05;
+    background: linear-gradient(120deg, #e2296f, #ff4d8d, #ff8fb3, #e2296f);
+    background-size: 200% auto;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: brilhoNome 5s linear infinite alternate;
+    opacity: 0; animation: surgir 1s .8s forwards, brilhoNome 5s linear infinite alternate;
+    text-shadow: none;
+  }
+  @keyframes brilhoNome { to { background-position: 200% center; } }
+  .frase-hero {
+    margin-top: 18px; font-weight: 300; color: #a85d7e;
+    font-size: clamp(1rem, 2.2vw, 1.2rem); max-width: 540px;
+    opacity: 0; animation: surgir 1s 1.1s forwards;
+  }
+  .frase-hero strong { color: var(--rosa); font-weight: 500; }
+  .botoes-hero {
+    margin-top: 34px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: surgir 1s 1.4s forwards;
+  }
+  .btn {
+    padding: 14px 30px; border-radius: 100px; border: none; cursor: pointer;
+    font-family: "Poppins", sans-serif; font-size: .95rem; font-weight: 500;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primario { background: var(--rosa); color: #fff; box-shadow: 0 12px 30px rgba(255,77,141,.4); }
+  .btn-primario:hover { transform: translateY(-3px) scale(1.03); }
+  .btn-fantasma {
+    background: transparent; color: var(--rosa);
+    border: 2px solid var(--rosa);
+  }
+  .btn-fantasma:hover { background: rgba(255,77,141,.08); transform: translateY(-3px); }
+  @keyframes surgir { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+  .indicador-scroll {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    width: 26px; height: 44px; border: 2px solid var(--rosa-suave);
+    border-radius: 16px; display: flex; justify-content: center; padding-top: 8px;
+  }
+  .indicador-scroll span {
+    width: 4px; height: 8px; border-radius: 4px; background: var(--rosa);
+    animation: rola 1.6s ease infinite;
+  }
+  @keyframes rola { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(14px); opacity: 0; } }
+
+  /* ================= TEMPO JUNTOS ================= */
+  #tempo { background: rgba(255,255,255,.5); backdrop-filter: blur(4px); }
+  .cards-tempo {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 40px;
+  }
+  .card-tempo {
+    background: rgba(255,255,255,.85);
+    border-radius: 20px; padding: 26px 12px;
+    box-shadow: 0 16px 40px rgba(255,77,141,.12);
+    border: 1px solid #fff;
+    transition: transform .25s;
+  }
+  .card-tempo:hover { transform: translateY(-6px); }
+  .card-tempo .numero {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem; font-weight: 700; color: var(--rosa);
+  }
+  .card-tempo .rotulo { color: #b06a8a; font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; margin-top: 4px; }
+  .modo-juntos { text-align: center; margin-top: 34px; }
+  .modo-juntos p {
+    font-family: "Dancing Script", cursive; font-size: clamp(1.6rem, 3.5vw, 2.3rem); color: var(--vinho);
+  }
+  .modo-juntos .singelo { font-family: "Poppins", sans-serif; font-size: .95rem; color: #b06a8a; font-weight: 300; }
+
+  /* ================= BOLO ================= */
+  #bolo { text-align: center; }
+  .palco-bolo {
+    margin: 46px auto 0; width: 300px; position: relative;
+  }
+  .prato {
+    width: 320px; height: 26px; border-radius: 50%;
+    background: linear-gradient(#fff, #f0d7e2);
+    box-shadow: 0 14px 30px rgba(255,77,141,.25);
+    margin: -10px auto 0; position: relative;
+  }
+  .prato:after {
+    content: ""; position: absolute; inset: 0; margin: 0 40px; border-radius: 50%;
+    height: 30px; background: radial-gradient(ellipse at 50% 40%, #fff7fa, rgba(0,0,0,.12));
+  }
+  .andar { border-radius: 16px; margin: 0 auto; position: relative; box-shadow: inset 0 -18px 24px rgba(138,28,69,.18); }
+  .andar.baixo {
+    width: 300px; height: 110px;
+    background: linear-gradient(#ff6da0, #ff4d8d);
+  }
+  .andar.meio {
+    width: 230px; height: 90px; margin-top: -4px;
+    background: linear-gradient(#ff8fb3, #ff6da0);
+    transform: translateY(-10px);
+  }
+  .andar.topo {
+    width: 160px; height: 70px;
+    background: linear-gradient(#ffb3cc, #ff8fb3);
+    transform: translateY(-20px);
+  }
+  .glace { position: absolute; top: 10px; left: 0; right: 0; height: 14px; border-radius: 12px; background: rgba(255,255,255,.85); filter: drop-shadow(0 2px 2px rgba(0,0,0,.05)); }
+  .glace:after { content: ""; position: absolute; right: 30px; top: 10px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.7); }
+  .velas { position: absolute; z-index: 5; display: flex; gap: 26px; left: 50%; top: -46px; transform: translateX(-50%); }
+  .vela { width: 12px; height: 40px; border-radius: 4px; background: linear-gradient(#fff, #ffe3ef); position: relative; box-shadow: 0 4px 8px rgba(138,28,69,.15); }
+  .vela:before { content: ""; position: absolute; left: 50%; top: -8px; transform: translateX(-50%); width: 4px; height: 8px; background: #f4c23c; border-radius: 2px; }
+  .chama {
+    position: absolute; left: 50%; top: -26px; transform: translateX(-50%);
+    width: 16px; height: 22px;
+    background: radial-gradient(circle at 50% 75%, #ffdf6e, #ff9d3f 55%, transparent);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: chamejar .45s ease-in-out infinite alternate;
+    transform-origin: 50% 100%;
+  }
+  @keyframes chamejar {
+    from { transform: translateX(-50%) scale(1) rotate(-2deg); }
+    to   { transform: translateX(-50%) translateY(-3px) scale(1.15) rotate(2deg); }
+  }
+  .apagada .chama { animation: apagar .6s ease forwards; }
+  @keyframes apagar {
+    0%   { transform: translateX(-50%) scale(1); opacity: 1; }
+    60%  { transform: translateX(-50%) scale(.3); opacity: .5; }
+    100% { transform: translateX(-50%) scale(0) translateY(-6px); opacity: 0; }
+  }
+  .fumaca {
+    position: absolute; left: 50%; top: -34px; transform: translateX(-50%);
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(140,140,160,.4); display: none;
+  }
+  .apagada .fumaca { display: block; animation: fumaca 1.2s ease forwards; }
+  @keyframes fumaca { to { transform: translateX(-50%) translateY(-30px) scale(3); opacity: 0; } }
+  .cereja {
+    position: absolute; width: 18px; height: 18px; border-radius: 50%;
+    background: radial-gradient(circle at 32% 28%, #ff8090, #c0213f);
+    box-shadow: 0 3px 5px rgba(0,0,0,.18);
+  }
+  .cereja span { position: absolute; top: -6px; left: 5px; width: 10px; height: 9px; border-left: 2px solid #6d4033; border-radius: 50% 0 0 50%; }
+
+  .frase-bolo { margin-top: 36px; font-family: "Dancing Script", cursive; font-size: 1.7rem; color: var(--vinho); min-height: 60px; }
+
+  /* ================= LINHA DO TEMPO ================= */
+  #historia { background: rgba(255,255,255,.5); backdrop-filter: blur(4px); }
+  .linha-do-tempo { position: relative; margin: 50px auto 0; max-width: 720px; }
+  .linha-do-tempo:before {
+    content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(var(--rosa-suave), var(--dourado));
+    transform: translateX(-50%);
+    border-radius: 3px;
+  }
+  .marco { position: relative; width: 50%; padding: 0 40px 50px; }
+  .marco:nth-child(odd) { left: 0; text-align: right; }
+  .marco:nth-child(even) { left: 50%; text-align: left; }
+  .marco .bolinha {
+    position: absolute; top: 6px; width: 18px; height: 18px; border-radius: 50%;
+    background: #fff; border: 4px solid var(--rosa);
+    box-shadow: 0 0 0 5px rgba(255,77,141,.15);
+    z-index: 2;
+  }
+  .marco:nth-child(odd) .bolinha { right: -9px; }
+  .marco:nth-child(even) .bolinha { left: -9px; }
+  .cartao-marco {
+    background: rgba(255,255,255,.9); border-radius: 18px; padding: 20px 22px;
+    box-shadow: 0 14px 34px rgba(255,77,141,.12);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .cartao-marco:hover { transform: translateY(-5px); box-shadow: 0 20px 44px rgba(255,77,141,.22); }
+  .marco .data { font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--rosa); font-weight: 600; }
+  .marco h3 { font-family: "Dancing Script", cursive; font-size: 1.6rem; color: var(--vinho); margin: 6px 0 6px; }
+  .marco p { font-size: .92rem; color: #9a6280; font-weight: 300; line-height: 1.6; }
+
+  /* ================= CARTA ================= */
+  #carta { background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(255,255,255,.6), transparent); }
+  .envelope {
+    position: relative; width: min(480px, 90vw); margin: 46px auto 0;
+    height: 300px; cursor: pointer; perspective: 1200px;
+    overflow: hidden;
+  }
+  .aba {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(160deg, #ff8fb3, #ff4d8d);
+    clip-path: polygon(0 0, 100% 0, 50% 58%);
+    transform-origin: top center;
+    transition: transform .7s ease;
+    z-index: 4;
+  }
+  .corpo-envelope {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, #ffb3cc, #ff6da0);
+    border-radius: 14px;
+    clip-path: polygon(0 32%, 50% 88%, 100% 32%, 100% 100%, 0 100%);
+    z-index: 2;
+  }
+  .selo {
+    position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, #fff, #ffd6e5);
+    color: var(--rosa); font-size: 1.6rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: inset 0 0 0 3px var(--rosa-suave);
+    z-index: 3; transition: opacity .4s;
+  }
+  .selo .cor { font-size: 1.2rem; }
+  .carta-dentro {
+    position: absolute; left: 6%; right: 6%; top: 30px;
+    background: #fffdfd; height: 250px; border-radius: 10px;
+    padding: 26px 24px; z-index: 1;
+    font-family: "Dancing Script", cursive; color: var(--vinho);
+    box-shadow: 0 8px 24px rgba(138,28,69,.15);
+    transform: translateY(0); transition: transform .8s .3s ease, height .8s .3s ease, z-index 0s .5s;
+    overflow: hidden;
+  }
+  .carta-dentro h3 { font-size: 1.9rem; margin-bottom: 8px; }
+  .carta-dentro p { font-family: "Poppins", sans-serif; font-size: .92rem; line-height: 1.7; color: #9a6280; font-weight: 300; }
+  .envelope.aberto { overflow: visible; }
+  .envelope.aberto .aba { transform: rotateX(180deg); z-index: 1; }
+  .envelope.aberto .selo { opacity: 0; }
+  .envelope.aberto .carta-dentro {
+    transform: translateY(-132px);
+    height: auto; min-height: 250px; max-height: 70vh;
+    overflow-y: auto; z-index: 6;
+    transition: transform .8s .25s ease, height .8s .25s ease, z-index 0s .2s;
+  }
+  .pista-abrir { text-align: center; margin-top: 22px; color: #b06a8a; font-size: .9rem; letter-spacing: .08em; }
+
+  /* ================= MOTIVOS ================= */
+  #motivos { background: rgba(255,255,255,.5); backdrop-filter: blur(4px); }
+  .grid-motivos {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 18px; margin-top: 44px;
+  }
+  .motivo {
+    background: rgba(255,255,255,.9); border-radius: 20px; padding: 28px 22px;
+    box-shadow: 0 14px 34px rgba(255,77,141,.1);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .motivo:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 22px 46px rgba(255,77,141,.2); }
+  .motivo .icone { font-size: 1.9rem; color: var(--rosa); margin-bottom: 12px; }
+  .motivo h3 { font-family: "Dancing Script", cursive; font-size: 1.5rem; color: var(--vinho); margin-bottom: 8px; }
+  .motivo p { font-size: .88rem; color: #9a6280; font-weight: 300; line-height: 1.6; }
+
+  /* ================= GALERIA POLAROID ================= */
+  #galeria { background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(255,143,179,.2), transparent); }
+  .grid-fotos {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 22px; margin-top: 46px;
+  }
+  .foto {
+    position: relative;
+    background: #fff; border-radius: 6px;
+    padding: 10px 10px 42px;
+    box-shadow: 0 14px 34px rgba(138,28,69,.18);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform .35s ease, box-shadow .35s ease, opacity .8s ease;
+    cursor: pointer;
+  }
+  .foto:nth-child(3n)      { --rot: 2.2deg; }
+  .foto:nth-child(3n+1)    { --rot: -2.4deg; }
+  .foto:nth-child(3n+2)    { --rot: 1.6deg; }
+  .foto:hover { transform: rotate(0deg) scale(1.05); box-shadow: 0 22px 44px rgba(138,28,69,.28); z-index: 3; }
+  .foto:before {
+    content: ""; position: absolute; top: -10px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    width: 84px; height: 24px;
+    background: linear-gradient(180deg, rgba(232,183,90,.55), rgba(232,183,90,.16));
+    box-shadow: 0 2px 4px rgba(0,0,0,.06);
+    z-index: 2;
+  }
+  .foto .miolo {
+    border-radius: 4px; overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(150deg, #ffd6e5, #ffeaf2);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .foto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .45s; }
+  .foto:hover img { transform: scale(1.06); }
+  .foto .legenda {
+    position: absolute; left: 0; right: 0; bottom: 9px;
+    text-align: center; font-family: "Dancing Script", cursive;
+    font-size: 1.15rem; color: var(--vinho);
+    pointer-events: none; padding: 0 8px; white-space: nowrap; overflow: hidden;
+  }
+  .foto .placeholder { text-align: center; color: #d46a94; padding: 14px; }
+  .foto .placeholder .cor { font-size: 2rem; }
+  .foto .placeholder p { margin-top: 6px; font-family: "Dancing Script", cursive; font-size: 1.2rem; }
+  .nota-fotos { margin-top: 26px; font-size: .85rem; color: #b06a8a; background: rgba(255,255,255,.7); padding: 12px 18px; border-radius: 12px; display: inline-block; }
+
+  /* ================= RODAPE ================= */
+  footer {
+    text-align: center; padding: 60px 20px 50px;
+    background: linear-gradient(180deg, transparent, rgba(255,77,141,.08));
+  }
+  .assinatura { font-family: "Dancing Script", cursive; font-size: 2.2rem; color: var(--vinho); }
+  footer p { margin-top: 8px; color: #b06a8a; font-size: .85rem; font-weight: 300; }
+  .data-final { font-family: "Playfair Display", serif; color: var(--rosa); font-weight: 600; }
+
+  /* ================= CONFETES ================= */
+  #confetes { position: fixed; inset: 0; pointer-events: none; z-index: 90; overflow: hidden; }
+  .confete {
+    position: absolute; top: -20px;
+    border-radius: 2px; opacity: 0;
+    animation: conffall linear forwards;
+  }
+  @keyframes conffall {
+    0%   { transform: translateY(-10px) rotate(0); opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 1; }
+  }
+
+  /* ================= SCROLL REVEAL ================= */
+  .revelar { opacity: 0; transform: translateY(34px); transition: opacity .8s ease, transform .8s ease; }
+  .revelar.visivel { opacity: 1; transform: translateY(0); }
+  .foto.revelar { transform: translateY(34px) rotate(var(--rot, 0deg)); }
+  .foto.revelar.visivel { transform: rotate(var(--rot, 0deg)); }
+
+  /* ================= CORACOES DO CURSOR ================= */
+  #coracaoCursor { position: fixed; inset: 0; pointer-events: none; z-index: 85; overflow: hidden; }
+  .cor-rastro {
+    position: absolute; pointer-events: none;
+    animation: rastro 1s ease forwards;
+  }
+  @keyframes rastro {
+    0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx, 0px), -75px) scale(.5); }
+  }
+
+  /* ================= BOTAO WHATSAPP ================= */
+  #botaoWhats {
+    position: fixed; bottom: 18px; left: 18px; z-index: 60;
+    width: 56px; height: 56px; border-radius: 50%;
+    border: none; cursor: pointer;
+    background: #25d366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 30px rgba(37,211,102,.45);
+    transition: transform .2s;
+  }
+  #botaoWhats:hover { transform: scale(1.1) rotate(-8deg); }
+  #botaoWhats svg { width: 28px; height: 28px; fill: #fff; }
+
+  /* ================= PROXIMA DATA ================= */
+  #proxima { background: linear-gradient(180deg, transparent, rgba(255,77,141,.05)); }
+  .cards-prox {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 40px;
+  }
+  .card-prox {
+    background: rgba(255,255,255,.85); border-radius: 20px; padding: 24px 10px;
+    border: 1px solid #fff; box-shadow: 0 16px 40px rgba(255,77,141,.12);
+    transition: transform .25s;
+  }
+  .card-prox:hover { transform: translateY(-6px); }
+  .card-prox .numero {
+    font-family: "Playfair Display", serif; font-size: 2.6rem; font-weight: 700; color: var(--dourado);
+  }
+  .card-prox .rotulo { color: #b06a8a; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; }
+  .nome-proxima {
+    margin-top: 30px; font-family: "Dancing Script", cursive;
+    font-size: clamp(1.5rem, 3vw, 2.1rem); color: var(--vinho);
+  }
+
+  /* ================= DESEJOS (FLIP) ================= */
+  #desejos { background: rgba(255,255,255,.5); backdrop-filter: blur(4px); }
+  .grid-desejos {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin-top: 44px; perspective: 1200px;
+  }
+  .desejo { position: relative; height: 200px; cursor: pointer; }
+  .desejo:hover .flip, .desejo.virado .flip { transform: rotateY(180deg); }
+  .flip {
+    position: relative; width: 100%; height: 100%;
+    transition: transform .7s cubic-bezier(.4,.2,.2,1);
+    transform-style: preserve-3d;
+  }
+  .face {
+    position: absolute; inset: 0; border-radius: 20px;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 18px; text-align: center;
+    box-shadow: 0 14px 34px rgba(255,77,141,.12);
+  }
+  .face.frente { background: linear-gradient(150deg, #ff6da0, #ff4d8d); color: #fff; }
+  .face.frente .num { font-family: "Dancing Script", cursive; font-size: 3.2rem; line-height: 1; }
+  .face.frente .txt { font-size: .85rem; font-weight: 300; margin-top: 10px; letter-spacing: .05em; }
+  .face.verso { background: rgba(255,255,255,.96); color: var(--vinho); transform: rotateY(180deg); }
+  .face.verso .simbolo { font-size: 1.6rem; }
+  .face.verso p { margin-top: 10px; font-size: .92rem; line-height: 1.55; color: #9a6280; font-weight: 300; }
+
+  /* ================= QUIZ ================= */
+  #quiz { background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(255,143,179,.16), transparent); }
+  .pergunta {
+    background: rgba(255,255,255,.92); border-radius: 20px; padding: 28px 24px;
+    max-width: 720px; margin: 34px auto 0; box-shadow: 0 16px 40px rgba(255,77,141,.12);
+  }
+  .pergunta h3 { font-family: "Dancing Script", cursive; font-size: 1.9rem; color: var(--vinho); }
+  .opcoes { display: grid; gap: 12px; margin-top: 18px; }
+  .opcao {
+    padding: 14px 18px; border-radius: 14px; border: 2px solid var(--rosa-claro);
+    background: #fff; color: var(--texto); font-family: "Poppins", sans-serif;
+    font-size: .95rem; cursor: pointer; text-align: left;
+    transition: transform .15s, background .15s, color .15s, border-color .15s;
+  }
+  .opcao:hover { transform: translateY(-2px); border-color: var(--rosa); }
+  .opcao.bloqueada { cursor: default; }
+  .opcao.bloqueada:hover { transform: none; }
+  .opcao.certa { background: #e8fbe8; border-color: #3ecf5a; color: #1f7a33; }
+  .opcao.errada { background: #ffeef4; border-color: #ff4d8d; color: #9c2b53; }
+  .retorno { font-family: "Poppins", sans-serif; font-size: .9rem; color: #9a6280; margin-top: 14px; min-height: 22px; }
+  .placar {
+    margin-top: 34px; text-align: center; font-family: "Dancing Script", cursive;
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem); color: var(--vinho);
+  }
+  .placar strong { font-size: 1.25em; color: var(--rosa); }
+
+  /* ================= RESPONSIVO ================= */
+  @media (max-width: 680px) {
+    .linha-do-tempo:before { left: 18px; }
+    .marco { width: 100%; left: 0 !important; text-align: left !important; padding-left: 56px; padding-right: 0; }
+    .marco .bolinha { left: 9px !important; right: auto !important; }
+    .cards-tempo { grid-template-columns: repeat(2, 1fr); }
+    .cards-prox { grid-template-columns: repeat(2, 1fr); }
+    .card-tempo .numero { font-size: 2.3rem; }
+    section { padding: 70px 20px; }
+  }
+
+  @media (max-width: 420px) {
+    .cards-tempo { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-fotos { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="coracao-preloader"></div>
+  <div class="texto-preloader">estou preparando algo especial pra você...</div>
+  <div class="barrinha"><span></span></div>
+</div>
+
+<!-- MUSICA -->
+<button id="botaoMusica" class="mudo" title="Tocar musiquinha" aria-label="Tocar musiquinha">
+  <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+</button>
+
+<!-- CORACOES DE FUNDO -->
+<div id="coracoes"></div>
+<div id="confetes"></div>
+<div id="coracaoCursor"></div>
+
+<!-- WHATSAPP -->
+<button id="botaoWhats" title="Enviar este presentinho" aria-label="Enviar este presentinho pelo WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.4 4 15.04c0 2.12.56 4.19 1.62 6.02L4 29l8.12-1.59a12.05 12.05 0 0 0 5.92 1.55c6.64 0 12.04-5.4 12.04-12.04S22.68 3 16.04 3zm0 21.4c-1.74 0-3.44-.47-4.93-1.35l-.35-.21-4.82.94.96-4.7-.23-.37a9.9 9.9 0 1 1 9.37 5.69zm5.44-7.41c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.19 5.06 4.47.71.3 1.26.49 1.69.63.71.22 1.35.19 1.86.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/></svg>
+</button>
+
+<main class="conteudo">
+
+  <!-- HERO -->
+  <section id="hero">
+    <span class="badge-data">sexta-feira <span class="ponto">&#10039;</span> 28 de agosto de 2026</span>
+    <p class="aniversariante-saudacao">Feliz aniversário, garota dos meus sonhos</p>
+    <h1 class="nome-grande" id="nomeEla">Iasmim</h1>
+    <p class="frase-hero">
+      Hoje você completa <strong>16 anos</strong> e eu tenho a sorte de estar ao seu lado.
+      São <strong>1 ano e 2 meses</strong> de um amor que só cresce a cada dia.
+    </p>
+    <div class="botoes-hero">
+      <button class="btn btn-primario" onclick="iniciarComemoracao()">Clique aqui pra te amar</button>
+      <a class="btn btn-fantasma" href="#tempo">Ver quanto tempo é com você</a>
+    </div>
+    <div class="indicador-scroll"><span></span></div>
+  </section>
+
+  <!-- TEMPO -->
+  <section id="tempo">
+    <div class="max centro">
+      <span class="tag">É oficial</span>
+      <h2 class="titulo-sessao">Quanto tempo eu te amei até aqui?</h2>
+      <p class="subtitulo-sessao">Desde 11 de junho de 2025, todo segundo ao seu lado é meu favorito. O contador nunca para, assim como o meu amor por você.</p>
+      <div class="cards-tempo">
+        <div class="card-tempo"><div class="numero" id="dias">0</div><div class="rotulo">dias</div></div>
+        <div class="card-tempo"><div class="numero" id="horas">0</div><div class="rotulo">horas</div></div>
+        <div class="card-tempo"><div class="numero" id="minutos">0</div><div class="rotulo">minutos</div></div>
+        <div class="card-tempo"><div class="numero" id="segundos">0</div><div class="rotulo">segundos</div></div>
+      </div>
+      <div class="modo-juntos">
+        <p>exatamente <span id="anosMesesDias">—</span> <span id="coracaoTempo">amando você</span></p>
+        <span class="singelo">e olha que coisa linda: hoje tem presente dobrado — seu aniversário e mais um dia do nosso amor.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROXIMA DATA -->
+  <section id="proxima">
+    <div class="max centro">
+      <span class="tag">O próximo marco</span>
+      <h2 class="titulo-sessao">Já tô contando os dias pro nosso próximo mêsversário</h2>
+      <p class="subtitulo-sessao">Falta pouco pro dia <strong id="dataProxima">—</strong> — e eu já tô ansioso, contando cada segundo de amor até lá.</p>
+      <div class="cards-prox">
+        <div class="card-prox"><div class="numero" id="pdias">0</div><div class="rotulo">dias</div></div>
+        <div class="card-prox"><div class="numero" id="phoras">0</div><div class="rotulo">horas</div></div>
+        <div class="card-prox"><div class="numero" id="pminutos">0</div><div class="rotulo">minutos</div></div>
+        <div class="card-prox"><div class="numero" id="psegundos">0</div><div class="rotulo">segundos</div></div>
+      </div>
+      <div class="nome-proxima" id="nomeProxima">—</div>
+    </div>
+  </section>
+
+  <!-- BOLO -->
+  <section id="bolo">
+    <div class="max centro">
+      <span class="tag">Hora do presente virtual</span>
+      <h2 class="titulo-sessao">Apague as velinhas, meu amor</h2>
+      <p class="subtitulo-sessao">Um bolo feito inteirinho de amor pra você. Clique no botão e faça um pedido...</p>
+
+      <div class="palco-bolo">
+        <div class="velas">
+          <div class="vela"><span class="chama"></span><span class="fumaca"></span></div>
+          <div class="vela"><span class="chama"></span><span class="fumaca"></span></div>
+          <div class="vela"><span class="chama"></span><span class="fumaca"></span></div>
+        </div>
+        <div class="andar topo"><span class="glace"></span><span class="cereja" style="left:20px"><span></span></span><span class="cereja" style="right:22px; top:34px;"><span></span></span></div>
+        <div class="andar meio"><span class="glace"></span></div>
+        <div class="andar baixo"><span class="glace"></span></div>
+        <div class="prato"></div>
+      </div>
+
+      <p class="frase-bolo" id="msgBolo">clique pra apagar ✨</p>
+      <button class="btn btn-primario" id="botaoVela" onclick="soprarVelas()">Soprar as velinhas</button>
+    </div>
+  </section>
+
+  <!-- HISTORIA -->
+  <section id="historia">
+    <div class="max centro">
+      <span class="tag">Nossa história</span>
+      <h2 class="titulo-sessao">Como tudo começou e como o amor cresceu</h2>
+      <p class="subtitulo-sessao">Cada momento nosso virou uma linha desta história que eu quero escrever com você por toda a vida.</p>
+    </div>
+    <div class="linha-do-tempo max" id="linhaTempo"></div>
+  </section>
+
+  <!-- CARTA -->
+  <section id="carta">
+    <div class="max centro">
+      <span class="tag">Uma cartinha</span>
+      <h2 class="titulo-sessao">Pra você, só pra você</h2>
+      <div class="envelope" id="envelope" onclick="abrirCarta()">
+        <div class="aba"></div>
+        <div class="carta-dentro">
+          <h3>Iasmim, meu amor,</h3>
+          <p id="textoCarta"></p>
+        </div>
+        <div class="selo"><span class="cor">&#9829;</span></div>
+        <div class="corpo-envelope"></div>
+      </div>
+      <p class="pista-abrir">clique no envelope para abrir a cartinha</p>
+    </div>
+  </section>
+
+  <!-- MOTIVOS -->
+  <section id="motivos">
+    <div class="max centro">
+      <span class="tag">Coisas de você</span>
+      <h2 class="titulo-sessao">Por que eu amo você</h2>
+      <p class="subtitulo-sessao">Só alguns motivos, porque se eu fosse listar todos o site não caberia.</p>
+      <div class="grid-motivos" id="gridMotivos"></div>
+    </div>
+  </section>
+
+  <!-- DESEJOS -->
+  <section id="desejos">
+    <div class="max centro">
+      <span class="tag">Do fundo do meu coração</span>
+      <h2 class="titulo-sessao">Desejos pro seu ano novo de vida</h2>
+      <p class="subtitulo-sessao">Passe o dedo (ou o mouse) nos cartões e vire cada um pra ler o que eu desejo pra você.</p>
+      <div class="grid-desejos" id="gridDesejos"></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="max centro">
+      <span class="tag">O teste do amor</span>
+      <h2 class="titulo-sessao">Você me conhece?</h2>
+      <p class="subtitulo-sessao">Responde aí, aniversariante. Cada acerto vale 1 coração — e 1 abraço meu quando te ver.</p>
+      <div id="areaQuiz"></div>
+      <div class="placar" id="placarQuiz"></div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria">
+    <div class="max centro">
+      <span class="tag">Nossos momentos</span>
+      <h2 class="titulo-sessao">Cada foto, uma lembrança nossa</h2>
+      <p class="subtitulo-sessao">Os quadros que eu guardo no meu coração (e aqui também).</p>
+      <div class="grid-fotos" id="gridFotos"></div>
+      <div class="nota-fotos">Dica: coloque fotos nas com o nome <strong>foto-1.jpg</strong>, <strong>foto-2.jpg</strong> ... na pasta <strong>fotos/</strong> ao lado deste arquivo e elas aparecem aqui sozinhas.</div>
+    </div>
+  </section>
+
+  <!-- RODAPE -->
+  <footer>
+    <div class="assinatura">feito com amor, pelo seu para sempre</div>
+    <p>Enzo <span class="data-final">&#10039;</span> 28.08.2026</p>
+  </footer>
+
+</main>
+
+<script>
+/* ============================================================
+   CONFIG — edite aqui o que quiser! Troque texts, datas, cartas
+   ============================================================ */
+const CONFIG = {
+  nomeEla: "Iasmim",
+  nomeVoce: "Enzo",
+  dataNamoro: "2025-06-11T00:00:00",
+  dataAniversario: "2026-08-28T00:00:00",
+  qtdConfetes: 140,
+
+  marcos: [
+    { data: "11 de junho de 2025", titulo: "O dia que tudo mudou",
+      texto: "Foi o dia em que a gente se entregou ao que já sentia. Nasci de novo naquele 11/06: dali em diante eu era inteirinho seu." },
+    { data: "Primeiros meses", titulo: "Nossos primeiros passos juntos",
+      texto: "Foto de maturidade, chamadas de madrugada, planos pro futuro e a descoberta de que amar você é a coisa mais fácil do mundo." },
+    { data: "11 de agosto de 2026", titulo: "1 ano e 2 meses de amor",
+      texto: "Começamos em 11/06/2025 e, meses depois, aqui estamos: mais apaixonado do que no primeiro dia. Você envelhece comigo e o amor só amadurece." },
+    { data: "28 de agosto de 2026", titulo: "Seus 16 aninhos comigo",
+      texto: "Hoje o aniversário é seu, mas o presente quem ganha sou eu: poder comemorar, sorrir e te amar com essa sorte toda." },
+    { data: "E daqui pra frente?", titulo: "Nossa vida em construção",
+      texto: "Todos os capítulos dessa história ainda estão em branco... e eu quero escrever cada um deles ao seu lado." },
+  ],
+
+  motivos: [
+    { icone: "&#9829;", titulo: "Seu sorriso",
+      texto: "É o meu lugar favorito no mundo inteiro. Um sorriso seu conserta o meu pior dia instantaneamente." },
+    { icone: "&#10022;", titulo: "Seu jeitinho",
+      texto: "O seu jeitinho único de ser, de falar, de teimar, de abraçar. Não existe outra Iasmim no mundo e Deus disso eu duvido." },
+    { icone: "&#9728;", titulo: "Seu olhar",
+      texto: "Quando seus olhos encontram os meus, o tempo para. É ali que eu quero viver pra sempre." },
+    { icone: "&#9835;", titulo: "Nossas risadas",
+      texto: "O melhor barulho do mundo é a gente rindo junto, sem nem lembrar do motivo. Você é a minha alegria constante." },
+    { icone: "&#10084;", titulo: "Seu abraço",
+      texto: "No seu abraço o mundo inteiro pode desabar que eu fico em paz. É o meu porto seguro chamado Iasmim." },
+    { icone: "&#10047;", titulo: "Seu coração",
+      texto: "Você me escolheu, me ama, cuida de mim. Não existe prêmio maior do que esse coração meu." },
+  ],
+
+  carta: "Hoje é um dia todo seu, mas deixa eu roubar um pedacinho. Faz 16 anos que o mundo recebeu você, e eu fico até sem jeito de pensar na sorte de ter chegado alguém tão perfeita. Desde 11 de junho de 2025 você é o meu vício bom, a minha risada, o meu plano pro futuro. São 1 ano e 2 meses de um amor que eu juro que só faz crescer. Que esse novo ano da sua vida seja do tamanho do teu sorriso. Te amo dos pés ao céu. Feliz aniversário, meu bem.",
+
+  /* WhatsApp: se preencher com o número (com DDI, ex: "5511999999999"),
+     o botão abre a conversa direto com ela. Deixe vazio para só abrir o envio da mensagem. */
+  whatsNumero: "",
+  whatsMensagem: "oii! achei isso e pensei em você na hora... olha o que o seu amor preparou:",
+  whatsTextoLink: "COLE-AQUI-O-LINK-DO-SITE",
+
+  legendaPolaroids: [
+    "nosso começo", "meu sorriso preferido", "nossos planos", "eu e você",
+    "nosso lugar", "te amo", "você e mais nada", "meu pedaço do céu",
+    "nossa risada", "meu porto seguro", "pra sempre", "o amor da minha vida",
+  ],
+
+  desejos: [
+    { simbolo: "&#9733;", texto: "Que todos os seus sonhos se realizem, um por um, do jeitinho que você imagina." },
+    { simbolo: "&#10084;", texto: "Que o teu sorriso continue sendo a coisa mais bonita deste mundo." },
+    { simbolo: "&#9728;", texto: "Que toda manhã sua tenha sol e razão de sobra pra ser feliz." },
+    { simbolo: "&#10047;", texto: "Que você nunca esqueça do quanto é incrível e merecedora de tudo." },
+    { simbolo: "&#9826;", texto: "Que a gente envelheça junto, rindo das mesmas piadas bobas." },
+    { simbolo: "&#9835;", texto: "Que a nossa trilha sonora tenha capítulos e mais capítulos." },
+    { simbolo: "&#9740;", texto: "Que paz e saúde alcancem você e a sua família sempre." },
+    { simbolo: "&#10022;", texto: "Que ninguém te ame mais do que eu. E eu não pretendo perder essa vaga." },
+  ],
+
+  quiz: [
+    { p: "Qual dia começou o nosso namoro?",
+      opcoes: ["11/06/2025", "12/07/2025", "28/08/2026"], certa: 0,
+      ok: "Acertou! Foi o dia mais importante da minha vida.",
+      errado: "Eita... foi 11/06/2025, o dia que eu virei o cara mais feliz do mundo." },
+    { p: "Em 11/08/2026 a gente completou...",
+      opcoes: ["1 ano e 1 mês", "1 ano e 2 meses", "1 ano e 3 meses"], certa: 1,
+      ok: "Exato! 1 ano e 2 meses te amando sem parar.",
+      errado: "Quase... foram 1 ano e 2 meses. Quer chutar comigo no jogo da vida?" },
+    { p: "Quem é a criatura mais linda do universo?",
+      opcoes: ["A Iasmim", "Alguma outra pessoa", "Não sei dizer"], certa: 0,
+      ok: "Óbvio né, controle! Se acertou, ja valeu o teste.",
+      errado: "Sem crise, a resposta é só uma: ela. A Iasmim." },
+    { p: "Hoje, 28/08/2026, o que a gente celebra?",
+      opcoes: ["Só aniversário", "Aniversário + nosso amor", "Nada especial"], certa: 1,
+      ok: "Isso mesmo: presente duplo pra gente comemorar.",
+      errado: "É aniversário dela E mais um dia do nosso amor. Tudo junto!" },
+    { p: "O que o Enzo mais gosta de fazer no mundo?",
+      opcoes: ["Estar com você", "Ficar longe de você", "Todas as opções"], certa: 0,
+      ok: "Pode ter certeza: estar com você é meu programa favorito pra sempre.",
+      errado: "Mentira bolada! É estar com você. Tô sempre pensando nisso." },
+  ],
+};
+
+/* ================= PRELOADER ================= */
+window.addEventListener("load", () => {
+  setTimeout(() => document.getElementById("preloader").classList.add("escondido"), 1200);
+  iniciarConfete(60);
+});
+
+/* ================= CORACOES DE FUNDO ================= */
+(() => {
+  const pai = document.getElementById("coracoes");
+  for (let i = 0; i < 22; i++) {
+    const c = document.createElement("span");
+    c.className = "coracao-flutuante";
+    const t = Math.floor(Math.random() * 10) + 12;
+    c.innerHTML = i % 3 === 0 ? "&#9829;" : i % 3 === 1 ? "&#10084;" : "&#10022;";
+    c.style.left = Math.random() * 100 + "%";
+    c.style.fontSize = t + "px";
+    c.style.animationDuration = (Math.random() * 14 + 12) + "s";
+    c.style.animationDelay = (Math.random() * 12) + "s";
+    pai.appendChild(c);
+  }
+})();
+
+/* ================= CONFETES ================= */
+function iniciarConfete(qtd) {
+  const pai = document.getElementById("confetes");
+  pai.innerHTML = "";
+  const cores = ["#ff4d8d", "#ff8fb3", "#e8b75a", "#ffb3cc", "#ffffff", "#c0213f"];
+  for (let i = 0; i < qtd; i++) {
+    const p = document.createElement("div");
+    p.className = "confete";
+    const tam = Math.random() * 10 + 6;
+    p.style.left = Math.random() * 100 + "%";
+    p.style.width = tam + "px";
+    p.style.height = tam * 0.45 + "px";
+    p.style.background = cores[Math.floor(Math.random() * cores.length)];
+    p.style.animationDuration = (Math.random() * 3 + 2.5) + "s";
+    p.style.animationDelay = Math.random() * 2 + "s";
+    pai.appendChild(p);
+  }
+  setTimeout(() => { pai.innerHTML = ""; }, 6500);
+}
+
+/* ================= CONTADOR ================= */
+const inicioNamoro = new Date(CONFIG.dataNamoro).getTime();
+const inicioAniversario = new Date(CONFIG.dataAniversario).getTime();
+
+function atualizarTempo() {
+  const agora = Date.now();
+  const diff = Math.max(0, agora - inicioNamoro);
+  const totalSeg = Math.floor(diff / 1000);
+  const dias = Math.floor(totalSeg / 86400);
+  const horas = Math.floor((totalSeg % 86400) / 3600);
+  const minutos = Math.floor((totalSeg % 3600) / 60);
+  const segundos = totalSeg % 60;
+  document.getElementById("dias").textContent = dias;
+  document.getElementById("horas").textContent = horas;
+  document.getElementById("minutos").textContent = minutos;
+  document.getElementById("segundos").textContent = segundos;
+}
+
+function calcularAnosMesesDias(inicio) {
+  let a = new Date(inicio);
+  let b = new Date();
+  let anos = b.getFullYear() - a.getFullYear();
+  let meses = b.getMonth() - a.getMonth();
+  let dias = b.getDate() - a.getDate();
+  if (dias < 0) { meses--; const aux = new Date(b.getFullYear(), b.getMonth(), 0); dias += aux.getDate(); }
+  if (meses < 0) { anos--; meses += 12; }
+  return `${anos} ano${anos !== 1 ? "s" : ""}, ${meses} mês${meses !== 1 ? "es" : ""} e ${dias} dia${dias !== 1 ? "s" : ""}`;
+}
+
+document.getElementById("anosMesesDias").textContent = calcularAnosMesesDias(inicioNamoro);
+document.getElementById("nomeEla").textContent = CONFIG.nomeEla;
+
+setInterval(atualizarTempo, 1000);
+atualizarTempo();
+
+/* ================= VELAS DO BOLO ================= */
+let velasApagadas = false;
+function soprarVelas() {
+  if (velasApagadas) return;
+  velasApagadas = true;
+  document.querySelector(".palco-bolo").classList.add("apagada");
+  document.getElementById("msgBolo").textContent = "Pedido feito! Todos os seus sonhos vão se realizar, eu prometo. Te amo, Iasmim " + "\u2764";
+  iniciarConfete(CONFIG.qtdConfetes);
+}
+
+/* iniciar comemoracao no hero */
+function iniciarComemoracao() {
+  document.querySelector(".palco-bolo").classList.add("apagada");
+  velasApagadas = true;
+  document.getElementById("msgBolo").textContent = "Pedido feito! Todos os seus sonhos vão se realizar, eu prometo. Te amo, Iasmim " + "\u2764";
+  iniciarConfete(CONFIG.qtdConfetes);
+  document.getElementById("historia").scrollIntoView({ behavior: "smooth" });
+}
+
+/* ================= LINHA DO TEMPO ================= */
+(() => {
+  const container = document.getElementById("linhaTempo");
+  CONFIG.marcos.forEach(m => {
+    const div = document.createElement("div");
+    div.className = "marco";
+    div.innerHTML = `
+      <span class="bolinha"></span>
+      <div class="cartao-marco">
+        <div class="data">${m.data}</div>
+        <h3>${m.titulo}</h3>
+        <p>${m.texto}</p>
+      </div>`;
+    container.appendChild(div);
+  });
+})();
+
+/* ================= CARTA ================= */
+document.getElementById("textoCarta").textContent = CONFIG.carta;
+function abrirCarta() {
+  document.getElementById("envelope").classList.toggle("aberto");
+}
+
+/* ================= MOTIVOS ================= */
+(() => {
+  const grid = document.getElementById("gridMotivos");
+  CONFIG.motivos.forEach(m => {
+    const card = document.createElement("div");
+    card.className = "motivo";
+    card.innerHTML = `<div class="icone">${m.icone}</div><h3>${m.titulo}</h3><p>${m.texto}</p>`;
+    grid.appendChild(card);
+  });
+})();
+
+/* ================= GALERIA POLAROID (carrega fotos/ automaticamente) ================= */
+(function montarGaleria() {
+  const grid = document.getElementById("gridFotos");
+  const total = 12;
+
+  function placeholderHtml() {
+    const d = document.createElement("div");
+    d.className = "placeholder";
+    d.innerHTML = `<div class="cor">&#9829;</div><p>aqui eu guardo<br/>um momento seu</p>`;
+    return d;
+  }
+
+  for (let i = 1; i <= total; i++) {
+    const box = document.createElement("div");
+    box.className = "foto";
+
+    const miolo = document.createElement("div");
+    miolo.className = "miolo";
+
+    const legenda = document.createElement("div");
+    legenda.className = "legenda";
+    legenda.textContent = CONFIG.legendaPolaroids[(i - 1) % CONFIG.legendaPolaroids.length];
+
+    const img = new Image();
+    img.onload = () => { miolo.innerHTML = ""; miolo.appendChild(img); };
+    img.onerror = () => { miolo.appendChild(placeholderHtml()); };
+    img.src = `fotos/foto-${i}.jpg`;
+
+    box.appendChild(miolo);
+    box.appendChild(legenda);
+    grid.appendChild(box);
+  }
+})();
+
+/* ================= CORACOES NO CURSOR ================= */
+const camadaCursor = document.getElementById("coracaoCursor");
+const SIMBOLOS_CURSOR = ["&#9829;", "&#10084;", "&#10022;"];
+let ultimoCoracao = 0;
+function soltarCoracao(x, y) {
+  if (!camadaCursor || document.hidden) return;
+  const agora = performance.now();
+  if (agora - ultimoCoracao < 40) return;
+  ultimoCoracao = agora;
+  const c = document.createElement("span");
+  c.className = "cor-rastro";
+  c.innerHTML = SIMBOLOS_CURSOR[Math.floor(Math.random() * SIMBOLOS_CURSOR.length)];
+  c.style.fontSize = (Math.random() * 14 + 10) + "px";
+  c.style.left = x + "px";
+  c.style.top = y + "px";
+  c.style.setProperty("--dx", ((Math.random() - .5) * 40) + "px");
+  camadaCursor.appendChild(c);
+  setTimeout(() => c.remove(), 1000);
+}
+document.addEventListener("mousemove", e => soltarCoracao(e.clientX, e.clientY));
+document.addEventListener("touchmove", e => {
+  for (let i = 0; i < e.touches.length; i++) soltarCoracao(e.touches[i].clientX, e.touches[i].clientY);
+}, { passive: true });
+
+/* ================= WHATSAPP ================= */
+document.getElementById("botaoWhats").addEventListener("click", () => {
+  const texto = encodeURIComponent(CONFIG.whatsMensagem + " " + CONFIG.whatsTextoLink);
+  const alvo = CONFIG.whatsNumero
+    ? `https://wa.me/${CONFIG.whatsNumero}?text=${texto}`
+    : `https://api.whatsapp.com/send?text=${texto}`;
+  window.open(alvo, "_blank");
+});
+
+/* ================= PROXIMO MARCO (mêsversário) ================= */
+const DATA_INICIO = new Date(CONFIG.dataNamoro);
+const NOMES_MES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+let alvoProximo = null;
+
+function getAlvoProximo() {
+  const agora = new Date();
+  if (!alvoProximo || Date.now() >= alvoProximo.getTime()) {
+    const dia = DATA_INICIO.getDate();
+    let alvo = new Date(agora.getFullYear(), agora.getMonth(), dia, 0, 0, 0);
+    if (alvo.getTime() <= Date.now()) {
+      alvo = new Date(agora.getFullYear(), agora.getMonth() + 1, dia, 0, 0, 0);
+    }
+    alvoProximo = alvo;
+    rotuloProximo();
+  }
+  return alvoProximo.getTime();
+}
+
+function rotuloProximo() {
+  const a = alvoProximo;
+  const totalMeses = (a.getFullYear() - DATA_INICIO.getFullYear()) * 12 + (a.getMonth() - DATA_INICIO.getMonth());
+  const anos = Math.floor(totalMeses / 12);
+  const meses = totalMeses % 12;
+  const partes = [];
+  if (anos) partes.push(anos + " ano" + (anos !== 1 ? "s" : ""));
+  if (meses) partes.push(meses + " mês" + (meses !== 1 ? "es" : ""));
+  document.getElementById("dataProxima").textContent = a.getDate() + " de " + NOMES_MES[a.getMonth()];
+  document.getElementById("nomeProxima").textContent =
+    partes.length ? "daqui a esse tempo: " + partes.join(" e ") + " de namoro!" : "";
+}
+
+function atualizarProxima() {
+  const diff = Math.max(0, getAlvoProximo() - Date.now());
+  const totalSeg = Math.floor(diff / 1000);
+  document.getElementById("pdias").textContent = Math.floor(totalSeg / 86400);
+  document.getElementById("phoras").textContent = Math.floor((totalSeg % 86400) / 3600);
+  document.getElementById("pminutos").textContent = Math.floor((totalSeg % 3600) / 60);
+  document.getElementById("psegundos").textContent = totalSeg % 60;
+}
+atualizarProxima();
+setInterval(atualizarProxima, 1000);
+
+/* ================= DESEJOS (FLIP) ================= */
+(() => {
+  const grid = document.getElementById("gridDesejos");
+  CONFIG.desejos.forEach((d, i) => {
+    const el = document.createElement("div");
+    el.className = "desejo";
+    el.innerHTML = `
+      <div class="flip">
+        <div class="face frente">
+          <div class="num">${i + 1}</div>
+          <div class="txt">passe e vire</div>
+        </div>
+        <div class="face verso">
+          <div class="simbolo">${d.simbolo}</div>
+          <p>${d.texto}</p>
+        </div>
+      </div>`;
+    el.addEventListener("click", () => el.classList.toggle("virado"));
+    grid.appendChild(el);
+  });
+})();
+
+/* ================= QUIZ ================= */
+const areaQuiz = document.getElementById("areaQuiz");
+let coracoesQuiz = 0;
+let respondidasQuiz = 0;
+const totalQuiz = CONFIG.quiz.length;
+
+CONFIG.quiz.forEach((q, qi) => {
+  const card = document.createElement("div");
+  card.className = "pergunta";
+  card.innerHTML = `
+    <h3>${q.p}</h3>
+    <div class="opcoes">
+      ${q.opcoes.map((o, oi) => `<button class="opcao" data-q="${qi}" data-o="${oi}">${o}</button>`).join("")}
+    </div>
+    <div class="retorno"></div>`;
+  areaQuiz.appendChild(card);
+});
+
+areaQuiz.addEventListener("click", (e) => {
+  const btn = e.target.closest(".opcao");
+  if (!btn || btn.classList.contains("bloqueada")) return;
+  const card = btn.closest(".pergunta");
+  const q = CONFIG.quiz[+btn.dataset.q];
+  const acertou = +btn.dataset.o === q.certa;
+
+  card.querySelectorAll(".opcao").forEach(b => {
+    b.classList.add("bloqueada");
+    if (+b.dataset.o === q.certa) b.classList.add("certa");
+  });
+  if (!acertou) btn.classList.add("errada");
+
+  card.querySelector(".retorno").textContent = acertou ? "\u2665 " + q.ok : q.errado;
+  coracoesQuiz += acertou ? 1 : 0;
+  respondidasQuiz++;
+
+  if (acertou) {
+    const r = card.getBoundingClientRect();
+    const cx = r.left + Math.random() * r.width;
+    const cy = r.top + Math.random() * r.height;
+    for (let k = 0; k < 8; k++) soltarCoracao(cx + (Math.random() - .5) * 120, cy + (Math.random() - .5) * 60);
+  }
+
+  const placar = document.getElementById("placarQuiz");
+  if (respondidasQuiz === totalQuiz) {
+    let msg;
+    if (coracoesQuiz === totalQuiz) {
+      msg = "PERFEITO! Você me conhece até demais. E eu te amo mais ainda por isso!";
+      iniciarConfete(120);
+    } else if (coracoesQuiz >= Math.ceil(totalQuiz * .6)) {
+      msg = "Quase perfeito! Mas pode ter certeza que eu te conheço de trás pra frente, meu amor.";
+    } else {
+      msg = "Tá precisando passar mais tempo comigo, hein? Relaxa, eu tô aqui o tempo todo!";
+    }
+    placar.innerHTML = `corações conquistados: <strong>${coracoesQuiz}</strong> de ${totalQuiz}. ${msg}`;
+  } else {
+    placar.innerHTML = `corações conquistados: <strong>${coracoesQuiz}</strong> de ${totalQuiz}`;
+  }
+});
+
+/* ================= ANIMACOES DE ROLAGEM ================= */
+(function initReveal() {
+  const alvos = document.querySelectorAll(
+    ".tag, .titulo-sessao, .subtitulo-sessao, .card-tempo, .card-prox, .motivo, .desejo, .pergunta, .cartao-marco, .foto"
+  );
+  if (!("IntersectionObserver" in window)) {
+    alvos.forEach(el => el.classList.add("visivel"));
+    return;
+  }
+  const io = new IntersectionObserver((entradas) => {
+    entradas.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add("visivel");
+        setTimeout(() => { en.target.style.transitionDelay = ""; }, 950);
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+
+  alvos.forEach((el, i) => {
+    if (el.closest("#hero")) return;
+    el.classList.add("revelar");
+    el.style.transitionDelay = (i % 6) * 60 + "ms";
+    io.observe(el);
+  });
+})();
+
+/* ================= MUSICA (Parabéns, versão piano) ================= */
+let ctx = null;
+let tocando = false;
+let proximaNota = 0;
+let indiceNota = 0;
+let cronometroTimer = null;
+
+const PARTITURA = [
+  // "Parabéns pra você" (tom de Dó maior), [frequencia, duracao em batidas]
+  [392, .5], [392, .5], [440, 1], [392, 1], [523, 1], [494, 2],
+  [392, .5], [392, .5], [440, 1], [392, 1], [587, 1], [523, 2],
+  [392, .5], [392, .5], [784, 1], [659, 1], [523, 1], [494, 1], [440, 2],
+  [698, .5], [698, .5], [659, 1], [523, 1], [587, 1], [523, 2],
+];
+
+const TEMPO_BASE = 360; // ms por batida
+
+function criarAudio() {
+  if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+  return ctx;
+}
+
+function tocarNota(freq, inicio, duracao) {
+  const c = criarAudio();
+  const osc = c.createOscillator();
+  const gain = c.createGain();
+  osc.type = "sine";
+  osc.frequency.value = freq;
+  const t0 = inicio;
+  gain.gain.setValueAtTime(0.0001, t0);
+  gain.gain.exponentialRampToValueAtTime(0.22, t0 + 0.02);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duracao * 0.9);
+  osc.connect(gain);
+  gain.connect(c.destination);
+  osc.start(t0);
+  osc.stop(t0 + duracao);
+}
+
+function agendarPartitura() {
+  const c = criarAudio();
+  indiceNota = 0;
+  proximaNota = c.currentTime + 0.1;
+  cronometroTimer = setInterval(() => {
+    if (indiceNota >= PARTITURA.length) { return; }
+    const [freq, batidas] = PARTITURA[indiceNota];
+    tocarNota(freq, proximaNota, batidas * TEMPO_BASE / 1000 * 1.1);
+    proximaNota += batidas * TEMPO_BASE / 1000;
+    indiceNota++;
+  }, 60);
+}
+
+function pararPartitura() {
+  clearInterval(cronometroTimer);
+}
+
+document.getElementById("botaoMusica").addEventListener("click", () => {
+  const btn = document.getElementById("botaoMusica");
+  tocando = !tocando;
+  if (tocando) {
+    btn.classList.remove("mudo");
+    agendarPartitura();
+  } else {
+    btn.classList.add("mudo");
+    pararPartitura();
+  }
+});
+</script>
+</body>
+</html>
