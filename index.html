@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Para a minha Iasmim</title>
 <meta name="theme-color" content="#ff4d8d" />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23ff4d8d' d='M16 29C6 22 2 15 2 10 2 5 5 2 9 2c3 0 6 1 7 4 1-3 4-4 7-4 4 0 7 3 7 8 0 5-4 12-14 19z'/%3E%3C/svg%3E" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Para a minha Iasmim" />
@@ -781,6 +785,96 @@
   #botaoQR { margin-top: 20px; }
   #imgQR { width: 220px; height: 220px; border-radius: 12px; display: block; margin: 0 auto 12px; }
 
+  /* ================= MENU LATERAL ================= */
+  #menuSecoes {
+    position: fixed; left: 16px; top: 50%; transform: translateY(-50%);
+    z-index: 55; display: none; flex-direction: column; gap: 11px;
+  }
+  .menu-dot {
+    width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--rosa-suave);
+    background: rgba(255,255,255,.75); cursor: pointer; padding: 0;
+    transition: transform .2s, background .2s, border-color .2s;
+    position: relative;
+  }
+  .menu-dot:hover { transform: scale(1.45); }
+  .menu-dot.ativo { background: var(--rosa); border-color: var(--rosa); transform: scale(1.3); }
+  .menu-dot .rotulo {
+    position: absolute; left: 26px; top: 50%; transform: translateY(-50%);
+    white-space: nowrap; background: rgba(255,255,255,.97); color: var(--vinho);
+    font-size: .72rem; padding: 5px 10px; border-radius: 100px;
+    opacity: 0; pointer-events: none; transition: opacity .2s;
+    box-shadow: 0 4px 14px rgba(255,77,141,.22); font-family: "Poppins", sans-serif;
+  }
+  .menu-dot:hover .rotulo { opacity: 1; }
+  @media (min-width: 1080px) { #menuSecoes { display: flex; } }
+
+  /* ================= SAUDACAO PELO HORARIO ================= */
+  .saudacao-hora { margin-top: 22px; font-size: .95rem; letter-spacing: .06em; color: #d46a94; }
+
+  /* ================= NOSSOS NUMEROS ================= */
+  .cards-numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-top: 40px; }
+  .card-numero {
+    background: rgba(255,255,255,.85); border-radius: 20px; padding: 26px 14px; text-align: center;
+    border: 1px solid #fff; box-shadow: 0 16px 40px rgba(255,77,141,.12); transition: transform .25s;
+  }
+  .card-numero:hover { transform: translateY(-6px); }
+  .card-numero .numero { font-family: "Playfair Display", serif; font-size: 1.7rem; font-weight: 700; color: var(--rosa); letter-spacing: .5px; }
+  .card-numero .rotulo { color: #b06a8a; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; margin-top: 8px; }
+  .card-numero .detalhe { font-size: .72rem; color: #c9a3b5; margin-top: 6px; }
+
+  /* ================= RECADO DE VOZ ================= */
+  .recado-caixa {
+    max-width: 480px; margin: 40px auto 0; background: rgba(255,255,255,.93);
+    border-radius: 24px; padding: 30px; text-align: center; box-shadow: 0 16px 40px rgba(255,77,141,.14);
+  }
+  #botaoRecado {
+    width: 86px; height: 86px; border-radius: 50%; border: none; cursor: pointer;
+    background: linear-gradient(150deg, #ff6da0, #e2296f); color: #fff; font-size: 2.1rem;
+    box-shadow: 0 14px 36px rgba(255,77,141,.45); margin: 12px auto 14px; display: block;
+    transition: transform .15s;
+  }
+  #botaoRecado:hover { transform: scale(1.08); }
+  #statusRecado { font-size: .85rem; color: #b06a8a; min-height: 20px; }
+  .girando { animation: tocaDisco .6s linear infinite; }
+  @keyframes tocaDisco { to { transform: rotate(360deg); } }
+
+  /* ================= UM AMOR PRA CADA MES ================= */
+  .grid-meses { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; margin-top: 40px; }
+  .mes-card {
+    background: rgba(255,255,255,.95); border-radius: 18px; overflow: hidden;
+    box-shadow: 0 12px 30px rgba(255,77,141,.1); cursor: pointer; transition: box-shadow .3s;
+  }
+  .mes-card .topo { padding: 18px 14px; text-align: center; }
+  .mes-card .topo .nome-mes { font-family: "Dancing Script", cursive; font-size: 1.55rem; color: var(--vinho); line-height: 1.1; }
+  .mes-card .topo .simbolo { color: var(--rosa); font-size: 1.05rem; margin-top: 4px; }
+  .mes-card .corpo {
+    max-height: 0; overflow: hidden; transition: max-height .5s ease, opacity .4s;
+    padding: 0 14px; opacity: 0; font-size: .88rem; color: #9a6280; font-weight: 300; line-height: 1.6;
+  }
+  .mes-card.aberto .corpo { max-height: 340px; padding: 0 14px 17px; opacity: 1; }
+  .mes-card.aberto { box-shadow: 0 18px 40px rgba(255,77,141,.2); }
+
+  /* ================= CAPSULA DO TEMPO ================= */
+  .capsula-caixa {
+    max-width: 560px; margin: 40px auto 0; background: rgba(255,255,255,.95);
+    border-radius: 22px; padding: 26px; box-shadow: 0 16px 40px rgba(255,77,141,.14);
+  }
+  #textoCapsula {
+    width: 100%; min-height: 110px; border-radius: 14px; border: 2px solid var(--rosa-claro);
+    padding: 14px; font-family: "Poppins", sans-serif; font-size: .95rem; color: var(--vinho);
+    resize: vertical; outline: none; background: #fff;
+  }
+  #textoCapsula:focus { border-color: var(--rosa); }
+  #salvarCapsula { margin-top: 12px; width: 100%; }
+  .lista-capsula { margin-top: 18px; display: grid; gap: 10px; }
+  .recado-item { background: var(--rosa-bebe); border-radius: 12px; padding: 12px 14px; font-size: .88rem; color: var(--vinho); line-height: 1.55; }
+  .recado-item .data { font-size: .7rem; color: #b06a8a; display: block; margin-bottom: 4px; font-family: "Poppins", sans-serif; }
+
+  /* ================= SELO DE HONRA ================= */
+  #seloModal .selo-grande { font-size: 4.4rem; text-align: center; margin: 6px 0 2px; }
+  #seloModal .data-selo { color: var(--rosa); font-weight: 600; }
+  #seloModal .corpo { text-align: center; color: var(--vinho); }
+
   /* ================= RESPONSIVO ================= */
   @media (max-width: 680px) {
     .linha-do-tempo:before { left: 18px; }
@@ -826,6 +920,9 @@
   <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
 </button>
 
+<!-- MENU LATERAL -->
+<div id="menuSecoes" aria-hidden="true"></div>
+
 <!-- CORACOES DE FUNDO -->
 <div id="coracoes"></div>
 <div id="baloes"></div>
@@ -842,6 +939,7 @@
   <!-- HERO -->
   <section id="hero">
     <span class="badge-data">sexta-feira <span class="ponto">&#10039;</span> 28 de agosto de 2026</span>
+    <p class="saudacao-hora" id="saudacaoHora"></p>
     <p class="aniversariante-saudacao">Feliz aniversário, garota dos meus sonhos</p>
     <h1 class="nome-grande" id="nomeEla">Iasmim</h1>
     <p class="frase-hero">
@@ -887,6 +985,16 @@
         <div class="card-prox"><div class="numero" id="psegundos">0</div><div class="rotulo">segundos</div></div>
       </div>
       <div class="nome-proxima" id="nomeProxima">—</div>
+    </div>
+  </section>
+
+  <!-- NOSSOS NUMEROS -->
+  <section id="numeros">
+    <div class="max centro">
+      <span class="tag">a matemática do amor</span>
+      <h2 class="titulo-sessao">Nossos números, nosso delírio</h2>
+      <p class="subtitulo-sessao">Números não mentem — e a conta toda fecha em "eu te amo". Cada um é calculado em tempo real, só por ser nosso.</p>
+      <div class="cards-numeros" id="gridNumeros"></div>
     </div>
   </section>
 
@@ -942,6 +1050,23 @@
     </div>
   </section>
 
+  <!-- RECADINHO DE VOZ -->
+  <section id="recado">
+    <div class="max centro">
+      <span class="tag">um pedacinho meu em áudio</span>
+      <h2 class="titulo-sessao">Aperta pra ouvir o Enzo</h2>
+      <div class="recado-caixa">
+        <div class="recado-caixa-nota">&#9835;</div>
+        <p class="subtitulo-sessao" style="margin-top:14px">Gravei um recadinho pensando em você. É só apertar o coração e deixar o som chegar.</p>
+        <div>
+          <button id="botaoRecado" title="Ouvir recadinho" aria-label="Ouvir recadinho">&#9829;</button>
+        </div>
+        <div id="statusRecado">carregando o recadinho...</div>
+      </div>
+      <p class="nota-fotos" style="margin-top:18px">Dica de quem te ama: grave um áudio, salve como <strong>fotos/recado.mp3</strong> e ele aparece aqui sozinho.</p>
+    </div>
+  </section>
+
   <!-- MOTIVOS -->
   <section id="motivos">
     <div class="max centro">
@@ -959,6 +1084,16 @@
       <h2 class="titulo-sessao">Desejos pro seu ano novo de vida</h2>
       <p class="subtitulo-sessao">Passe o dedo (ou o mouse) nos cartões e vire cada um pra ler o que eu desejo pra você.</p>
       <div class="grid-desejos" id="gridDesejos"></div>
+    </div>
+  </section>
+
+  <!-- UM AMOR PRA CADA MES -->
+  <section id="meses">
+    <div class="max centro">
+      <span class="tag">os próximos 12 meses</span>
+      <h2 class="titulo-sessao">Um amor pra cada mês do seu novo ano</h2>
+      <p class="subtitulo-sessao">Doze adeus ao ano que passou, doze "vem comigo" pro que vem. Toque num mês pra ler o que eu reservo pra você nele.</p>
+      <div class="grid-meses" id="gridMeses"></div>
     </div>
   </section>
 
@@ -999,6 +1134,20 @@
     </div>
   </section>
 
+  <!-- CAPSULA DO TEMPO -->
+  <section id="capsula">
+    <div class="max centro">
+      <span class="tag">uma viagem no tempo só pra você</span>
+      <h2 class="titulo-sessao">Cápsula do tempo do nosso amor</h2>
+      <p class="subtitulo-sessao">Escreve aqui um segredo, uma promessa ou um "te amo" que você queira encontrar outra hora. Fica guardado só no seu celular — é seu pra sempre.</p>
+      <div class="capsula-caixa">
+        <textarea id="textoCapsula" placeholder="Escreva um recado pra você mesma ler depois..."></textarea>
+        <button class="btn btn-primario" id="salvarCapsula">Guardar na cápsula &#9829;</button>
+        <div class="lista-capsula" id="listaCapsula"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- GALERIA -->
   <section id="galeria">
     <div class="max centro">
@@ -1035,6 +1184,19 @@
     <h3>Aponte e abra no celular</h3>
     <img id="imgQR" alt="QR code do site" />
     <p style="font-size:.85rem;color:#b06a8a;word-break:break-all" id="textoQR"></p>
+  </div>
+</div>
+
+<!-- MODAL: SELO DE HONRA -->
+<div class="modal-camada" id="seloModal">
+  <div class="modal-caixa">
+    <button class="fechar" aria-label="Fechar">&#10005;</button>
+    <div class="corpo">
+      <div class="selo-grande">&#127941;</div>
+      <h3>Selo de honra conquistado!</h3>
+      <p>Você explorou o presentinho inteirinho — o que significa que você é, oficialmente, a dona de 100% do meu coração.</p>
+      <p style="margin-top:10px">conquistado em <span class="data-selo" id="dataSelo">—</span></p>
+    </div>
   </div>
 </div>
 
@@ -1176,6 +1338,38 @@ const CONFIG = {
     { titulo: "Nossa música 3", artista: "nome do artista", link: "", youtube: "" },
     { titulo: "Nossa música 4", artista: "nome do artista", link: "", youtube: "" },
   ],
+
+  /* Um amor pra cada um dos 12 meses do novo ano dela (Setembro...Agosto).
+     Pode trocar as mensagens à vontade. */
+  mesInicio: 8,
+  meses: [
+    "Um mês pra gente plantar aquela ideia nova e eu regar de beijo em beijo.",
+    "Mês de dividir doce, abraço e aquele plano bobo que só a gente entende.",
+    "As noites vão esfriando... e você continua aquecendo tudo.",
+    "Meu Natal é quando você sorri assim, do jeito que só você sabe.",
+    "Ano novo, mesmo amor, mesma pessoa escolhida: você.",
+    "Carnaval até passa, mas o meu amor por você não desfila nunca.",
+    "Outono chegando e a gente só esquentando o coração um do outro.",
+    "Chuva daqui é só pretexto pra abraço demorado.",
+    "Mês de cuidar de quem a gente ama — e de te amar um pouco mais, se der.",
+    "O mês em que tudo começou. E continua. Sempre continua.",
+    "Férias são planos perfeitos — e o meu melhor plano sempre vai ser você.",
+    "Aniversário de novo, e eu de novo aqui, contando os meses do seu lado. Te amo.",
+  ],
+
+  /* Nossos números — tipos: "dias", "horas", "minutos", "batimentos".
+     Ou coloque texto próprio em "texto" no lugar de "tipo". */
+  nossosNumeros: [
+    { rotulo: "dias juntos", tipo: "dias", detalhe: "e contando, sem pausa" },
+    { rotulo: "horas de amor", tipo: "horas", detalhe: "todas boas, sem exceção" },
+    { rotulo: "minutinhos a mais", tipo: "minutos", detalhe: "cada um é seu" },
+    { rotulo: "batidas do coração", tipo: "batimentos", detalhe: "do meu coração (e do seu também)" },
+    { rotulo: "largura do meu sorriso", texto: "sem tamanho quando é você", detalhe: "medida do meu amor: infinita" },
+  ],
+
+  /* Recadinho de voz: grave um áudio, salve como fotos/recado.mp3
+     (ou aponte o caminho aqui) e ele toca na seção "aperta pra ouvir o Enzo". */
+  recadoAudio: "fotos/recado.mp3",
 };
 
 /* ================= PRELOADER ================= */
@@ -1528,7 +1722,7 @@ areaQuiz.addEventListener("click", (e) => {
 /* ================= ANIMACOES DE ROLAGEM ================= */
 (function initReveal() {
   const alvos = document.querySelectorAll(
-    ".tag, .titulo-sessao, .subtitulo-sessao, .card-tempo, .card-prox, .motivo, .desejo, .pergunta, .cartao-marco, .foto"
+    ".tag, .titulo-sessao, .subtitulo-sessao, .card-tempo, .card-prox, .motivo, .desejo, .pergunta, .cartao-marco, .foto, .card-numero, .mes-card, .recado-caixa, .capsula-caixa"
   );
   if (!("IntersectionObserver" in window)) {
     alvos.forEach(el => el.classList.add("visivel"));
@@ -1680,6 +1874,7 @@ function atualizarMapaUI() {
     presenteCompleto = true;
     try { localStorage.setItem("presenteCompleto", "1"); } catch (e) {}
     if (window.fogosDeArtificio) window.fogosDeArtificio(10000);
+    abrirSelo();
   }
 }
 
@@ -1959,6 +2154,179 @@ document.getElementById("botaoMusica").addEventListener("click", () => {
     pararPartitura();
   }
 });
+
+/* ================= SAUDACAO PELO HORARIO ================= */
+(function saudacaoHora() {
+  const h = new Date().getHours();
+  const txt = h >= 5 && h < 12 ? "bom dia, meu amor"
+    : h >= 12 && h < 18 ? "boa tarde, meu amor"
+    : "boa noite, meu amor";
+  document.getElementById("saudacaoHora").textContent = txt;
+})();
+
+/* ================= NOSSOS NUMEROS ================= */
+(function nossosNumeros() {
+  const grid = document.getElementById("gridNumeros");
+  const dias = Math.max(0, Math.floor((Date.now() - inicioNamoro) / 86400000));
+  const fmt = n => n.toLocaleString("pt-BR");
+  const tipos = {
+    dias: Math.floor(dias),
+    horas: Math.floor(dias * 24),
+    minutos: Math.floor(dias * 1440),
+    batimentos: Math.round(dias * 86400 * 1.3),
+  };
+  CONFIG.nossosNumeros.forEach(n => {
+    const el = document.createElement("div");
+    el.className = "card-numero";
+    el.innerHTML = `<div class="numero">${n.tipo ? fmt(tipos[n.tipo] || 0) : n.texto}</div><div class="rotulo">${n.rotulo}</div>`;
+    if (n.detalhe) el.insertAdjacentHTML("beforeend", `<div class="detalhe">${n.detalhe}</div>`);
+    grid.appendChild(el);
+  });
+})();
+
+/* ================= RECADINHO DE VOZ ================= */
+(function recadoVoz() {
+  const secao = document.getElementById("recado");
+  const btn = document.getElementById("botaoRecado");
+  const status = document.getElementById("statusRecado");
+  const audio = new Audio(CONFIG.recadoAudio);
+  let pronto = false;
+
+  audio.addEventListener("canplaythrough", () => {
+    pronto = true;
+    status.textContent = "aperta aí e escuta o meu coração";
+  }, { once: true });
+  audio.addEventListener("error", () => {
+    secao.style.display = "none";
+  });
+  btn.addEventListener("click", () => {
+    if (!pronto) { status.textContent = "ainda carregando... espera mais um pouquinho"; return; }
+    if (audio.paused) {
+      audio.play();
+      btn.classList.add("girando");
+      status.textContent = "tocando um pedacinho meu só pra você...";
+    } else {
+      audio.pause();
+      btn.classList.remove("girando");
+      status.textContent = "quando quiser, aperta de novo";
+    }
+  });
+  audio.addEventListener("ended", () => {
+    btn.classList.remove("girando");
+    status.textContent = "apertou meu coração por aí? aperta de novo que eu repito";
+  });
+})();
+
+/* ================= UM AMOR PRA CADA MES ================= */
+(function mesesDoAno() {
+  const grid = document.getElementById("gridMeses");
+  const mesInicio = CONFIG.mesInicio || 8;
+  CONFIG.meses.forEach((texto, i) => {
+    const idx = (mesInicio + i) % 12;
+    const el = document.createElement("div");
+    el.className = "mes-card";
+    el.innerHTML = `
+      <div class="topo">
+        <div class="nome-mes">${NOMES_MES[idx]}</div>
+        <div class="simbolo">&#9829;</div>
+      </div>
+      <div class="corpo">${texto}</div>`;
+    el.addEventListener("click", () => el.classList.toggle("aberto"));
+    grid.appendChild(el);
+  });
+})();
+
+/* ================= CAPSULA DO TEMPO ================= */
+(function capsula() {
+  const ta = document.getElementById("textoCapsula");
+  const botao = document.getElementById("salvarCapsula");
+  const lista = document.getElementById("listaCapsula");
+  let recados = [];
+  try { recados = JSON.parse(localStorage.getItem("capsulaRecados") || "[]") || []; } catch (e) {}
+
+  function render() {
+    lista.innerHTML = "";
+    recados.slice().reverse().forEach(r => {
+      const d = document.createElement("div");
+      d.className = "recado-item";
+      const t = new Date(r.t);
+      d.innerHTML = `<span class="data">${t.toLocaleDateString("pt-BR")} ${t.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}</span>${r.txt}`;
+      lista.appendChild(d);
+    });
+  }
+
+  botao.addEventListener("click", () => {
+    const txt = ta.value.trim();
+    if (!txt) return;
+    recados.push({ t: Date.now(), txt });
+    try { localStorage.setItem("capsulaRecados", JSON.stringify(recados)); } catch (e) {}
+    ta.value = "";
+    render();
+  });
+  render();
+})();
+
+/* ================= MENU LATERAL ================= */
+(function menuSeguro() {
+  const pai = document.getElementById("menuSecoes");
+  const secoes = [
+    ["hero", "início"], ["tempo", "tempo juntos"], ["proxima", "próximo marco"], ["numeros", "números"],
+    ["bolo", "velinhas"], ["historia", "nossa história"], ["carta", "cartinha"], ["recado", "recado"],
+    ["motivos", "motivos"], ["desejos", "desejos"], ["meses", "meses"], ["roleta", "roleta"],
+    ["quiz", "quiz"], ["playlist", "playlist"], ["capsula", "cápsula"], ["galeria", "fotos"],
+  ];
+  const botoes = secoes.map(([id, label]) => {
+    const d = document.createElement("button");
+    d.className = "menu-dot";
+    d.title = label;
+    d.dataset.alvo = id;
+    d.innerHTML = `<span class="rotulo">${label}</span>`;
+    d.addEventListener("click", () => {
+      const alvo = document.getElementById(id);
+      if (alvo) alvo.scrollIntoView({ behavior: "smooth" });
+    });
+    pai.appendChild(d);
+    return d;
+  });
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entradas) => {
+      entradas.forEach(en => {
+        if (en.isIntersecting) {
+          botoes.forEach(b => b.classList.toggle("ativo", b.dataset.alvo === en.target.id));
+        }
+      });
+    }, { rootMargin: "-45% 0px -45% 0px", threshold: 0 });
+    secoes.forEach(([id]) => {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+})();
+
+/* ================= SELO DE HONRA ================= */
+function fecharSeloModal() {
+  const modal = document.getElementById("seloModal");
+  modal.classList.remove("aberta");
+  if (!document.querySelector(".modal-camada.aberta")) document.body.style.overflow = "";
+}
+function abrirSelo() {
+  document.getElementById("dataSelo").textContent = new Date().toLocaleDateString("pt-BR");
+  document.getElementById("seloModal").classList.add("aberta");
+  document.body.style.overflow = "hidden";
+  iniciarConfete(120);
+}
+(function montarSelo() {
+  const modal = document.getElementById("seloModal");
+  modal.querySelector(".fechar").addEventListener("click", fecharSeloModal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) fecharSeloModal(); });
+})();
+
+/* ================= PWA: instalar como "app" ================= */
+if ("serviceWorker" in navigator) {
+  addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
