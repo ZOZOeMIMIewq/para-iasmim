@@ -662,6 +662,125 @@
   }
   .musica .ouvir:hover { transform: scale(1.06); }
 
+  /* ================= BALOES DE ANIVERSARIO ================= */
+  #baloes { position: fixed; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+  .balao {
+    position: absolute; bottom: -180px;
+    width: calc(var(--t) * .72); height: var(--t);
+    border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+    opacity: .3;
+    animation: subirBalao linear infinite;
+    box-shadow: inset -8px -6px 18px rgba(0, 0, 0, .12);
+  }
+  .balao:after {
+    content: ""; position: absolute; top: 100%; left: 50%;
+    width: 1px; height: 60px; background: rgba(150, 110, 80, .4);
+  }
+  @keyframes subirBalao {
+    0%   { transform: translateY(0) translateX(0); }
+    25%  { transform: translateY(-30vh) translateX(16px) rotate(2deg); }
+    50%  { transform: translateY(-62vh) translateX(-14px) rotate(-2deg); }
+    75%  { transform: translateY(-92vh) translateX(12px) rotate(1deg); }
+    100% { transform: translateY(-120vh) translateX(-8px) rotate(-1deg); }
+  }
+
+  /* ================= TRAVA DE DESBLOQUEIO ================= */
+  #trava {
+    position: fixed; inset: 0; z-index: 600;
+    background: linear-gradient(160deg, #ffe3ef, #ffd6e5);
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+    transition: opacity .8s ease;
+  }
+  #trava[hidden] { display: none !important; }
+  #trava.some { opacity: 0; pointer-events: none; }
+  .trava-caixa {
+    background: rgba(255, 255, 255, .94); border-radius: 24px;
+    max-width: 460px; width: 100%; padding: 36px 28px; text-align: center;
+    box-shadow: 0 30px 80px rgba(138, 28, 69, .25);
+  }
+  .trava-coracao { font-size: 3.2rem; color: var(--rosa); animation: bater 1s infinite; }
+  .trava-caixa h2 { font-family: "Dancing Script", cursive; font-size: 1.9rem; color: var(--vinho); margin: 6px 0 10px; }
+  .trava-caixa p { font-size: .92rem; color: #9a6280; font-weight: 300; line-height: 1.6; }
+  .trava-caixa input {
+    width: 100%; margin-top: 18px; padding: 14px 16px; border-radius: 14px;
+    border: 2px solid var(--rosa-claro); font-family: "Poppins", sans-serif;
+    font-size: 1rem; text-align: center; color: var(--vinho); outline: none;
+    transition: border-color .2s;
+  }
+  .trava-caixa input:focus { border-color: var(--rosa); }
+  #botaoTrava {
+    margin-top: 14px; width: 100%; padding: 14px; border: none; border-radius: 100px;
+    background: var(--rosa); color: #fff; font-family: "Poppins", sans-serif;
+    font-size: 1rem; cursor: pointer; box-shadow: 0 12px 30px rgba(255, 77, 141, .4);
+    transition: transform .15s;
+  }
+  #botaoTrava:hover { transform: translateY(-2px); }
+  #travaErro { color: #c0213f; font-size: .85rem; min-height: 20px; margin-top: 10px; }
+  .link-dica { background: none; border: none; color: #b06a8a; font-size: .82rem; cursor: pointer; text-decoration: underline; margin-top: 6px; }
+  #travaDica { margin-top: 10px; font-size: .82rem; color: var(--rosa); background: var(--rosa-bebe); border-radius: 10px; padding: 10px; }
+
+  /* ================= MODAIS ================= */
+  .modal-camada {
+    position: fixed; inset: 0; z-index: 250;
+    background: rgba(45, 10, 25, .82); backdrop-filter: blur(5px);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-camada.aberta { display: flex; }
+  .modal-caixa {
+    background: #fffdfd; border-radius: 20px; max-width: 560px; width: 100%;
+    padding: 32px 26px; position: relative; box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+    max-height: 84vh; overflow-y: auto;
+  }
+  .modal-caixa .fechar {
+    position: absolute; top: 12px; right: 12px; width: 38px; height: 38px;
+    border-radius: 50%; border: none; background: var(--rosa-bebe); color: var(--rosa);
+    font-size: 1.05rem; cursor: pointer;
+  }
+  .modal-caixa h3 { font-family: "Dancing Script", cursive; font-size: 2rem; color: var(--vinho); margin-bottom: 12px; }
+  .modal-caixa .corpo { font-family: "Poppins", sans-serif; font-size: .92rem; line-height: 1.75; color: #9a6280; font-weight: 300; }
+
+  /* ================= ROLETA ================= */
+  #roleta { background: radial-gradient(ellipse 70% 55% at 50% 0%, rgba(255, 143, 179, .14), transparent); }
+  .roleta-botoes { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+  .palco-roleta {
+    margin: 26px auto 0; max-width: 560px; min-height: 120px;
+    background: rgba(255, 255, 255, .94); border-radius: 20px; padding: 26px 22px;
+    box-shadow: 0 16px 40px rgba(255, 77, 141, .12);
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-family: "Poppins", sans-serif; font-weight: 500; color: var(--vinho); line-height: 1.6;
+  }
+  .palco-roleta.gira { animation: pop .45s ease; }
+  @keyframes pop {
+    0% { transform: scale(.55); opacity: .3; }
+    60% { transform: scale(1.06); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .palco-roleta .vazio { color: #b06a8a; font-weight: 300; }
+  .roleta-tag { font-family: "Dancing Script", cursive; font-size: 1.5rem; color: var(--rosa); display: block; margin-bottom: 8px; }
+
+  /* ================= PLAYER DE MUSICA ================= */
+  .musica .tocar-aqui {
+    border: 2px solid var(--rosa); background: transparent; color: var(--rosa);
+    border-radius: 100px; padding: 10px 16px; font-family: "Poppins", sans-serif;
+    font-size: .85rem; cursor: pointer; flex: none; transition: transform .15s, background .15s;
+  }
+  .musica .tocar-aqui:hover { background: rgba(255, 77, 141, .08); transform: scale(1.05); }
+  .player-musica { width: 100%; aspect-ratio: 16 / 9; max-height: 240px; border: none; border-radius: 12px; margin-top: 10px; display: none; }
+
+  /* ================= CORACAO SECRETO ================= */
+  #coracaoSecreto {
+    background: none; border: none; font-size: 1.5rem; color: var(--rosa);
+    cursor: pointer; padding: 0 6px; vertical-align: middle; transition: transform .15s;
+  }
+  #coracaoSecreto.estremecendo { animation: tremor .35s ease; }
+  @keyframes tremor {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(-12deg) scale(1.15); }
+    75% { transform: rotate(12deg) scale(1.15); }
+  }
+  #botaoQR { margin-top: 20px; }
+  #imgQR { width: 220px; height: 220px; border-radius: 12px; display: block; margin: 0 auto 12px; }
+
   /* ================= RESPONSIVO ================= */
   @media (max-width: 680px) {
     .linha-do-tempo:before { left: 18px; }
@@ -688,6 +807,20 @@
   <div class="barrinha"><span></span></div>
 </div>
 
+<!-- TRAVA (desbloquear com a data do namoro) -->
+<div id="trava" hidden>
+  <div class="trava-caixa">
+    <div class="trava-coracao">&#9829;</div>
+    <h2>Parou! Este presente tem segredo.</h2>
+    <p>Para abrir, prove que a história é sua: qual foi a data em que tudo começou?</p>
+    <input id="inputTrava" type="text" placeholder="ex: 11/06/2025" autocomplete="off" />
+    <button id="botaoTrava">Liberar o presente</button>
+    <div id="travaErro"></div>
+    <button id="botaoDica" class="link-dica">toque pra pedir uma dica</button>
+    <div id="travaDica" hidden>Dia <strong>11</strong>, mês <strong>06</strong>, ano <strong>2025</strong>. Pode escrever assim: 11/06/2025.</div>
+  </div>
+</div>
+
 <!-- MUSICA -->
 <button id="botaoMusica" class="mudo" title="Tocar musiquinha" aria-label="Tocar musiquinha">
   <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
@@ -695,6 +828,7 @@
 
 <!-- CORACOES DE FUNDO -->
 <div id="coracoes"></div>
+<div id="baloes"></div>
 <div id="confetes"></div>
 <div id="coracaoCursor"></div>
 
@@ -839,6 +973,22 @@
     </div>
   </section>
 
+  <!-- ROLETA -->
+  <section id="roleta">
+    <div class="max centro">
+      <span class="tag">Pros dois</span>
+      <h2 class="titulo-sessao">Roleta de verdade ou beijo</h2>
+      <p class="subtitulo-sessao">Clique e sorteie agora uma pergunta pra gente responder (mesmo de longe). Se sobrar tempo, use nos nossos encontros também.</p>
+      <div class="roleta-botoes">
+        <button class="btn btn-primario" onclick="girarRoleta('verdade')">Roletar VERDADE</button>
+        <button class="btn btn-fantasma" onclick="girarRoleta('desafio')">Roletar um BEIJO &#9829;</button>
+      </div>
+      <div class="palco-roleta" id="palcoRoleta">
+        <span class="vazio">a roleta espera você girar...</span>
+      </div>
+    </div>
+  </section>
+
   <!-- PLAYLIST -->
   <section id="playlist">
     <div class="max centro">
@@ -863,10 +1013,30 @@
   <!-- RODAPE -->
   <footer>
     <div class="assinatura">feito com amor, pelo seu para sempre</div>
-    <p>Enzo <span class="data-final">&#10039;</span> 28.08.2026</p>
+    <p>Enzo <span class="data-final">&#10039;</span> 28.08.2026 <button id="coracaoSecreto" title="toque 3 vezes" aria-label="toque 3 vezes">&#9829;</button></p>
+    <button id="botaoQR" class="btn btn-fantasma">abrir no celular (QR code)</button>
   </footer>
 
 </main>
+
+<!-- MODAL: CARTA SECRETA -->
+<div class="modal-camada" id="cartaSecreta">
+  <div class="modal-caixa">
+    <button class="fechar" aria-label="Fechar">&#10005;</button>
+    <h3>Uma segunda cartinha... secreta</h3>
+    <div class="corpo" id="textoCartaSecreta"></div>
+  </div>
+</div>
+
+<!-- MODAL: QR CODE -->
+<div class="modal-camada" id="qrModal">
+  <div class="modal-caixa" style="text-align:center">
+    <button class="fechar" aria-label="Fechar">&#10005;</button>
+    <h3>Aponte e abra no celular</h3>
+    <img id="imgQR" alt="QR code do site" />
+    <p style="font-size:.85rem;color:#b06a8a;word-break:break-all" id="textoQR"></p>
+  </div>
+</div>
 
 <!-- FOGOS DE ARTIFICIO -->
 <canvas id="fogos"></canvas>
@@ -979,12 +1149,32 @@ const CONFIG = {
       errado: "Mentira bolada! É estar com você. Tô sempre pensando nisso." },
   ],
 
-  /* Playlist do nosso amor — edite os títulos, artistas e links (YouTube) de vocês */
+  cartaSecreta: "Iasmim, essa aqui é pra quando você encontrar o botão escondido. Eu te guardei as melhores palavras pro final, e olha o que aconteceu: até aqui, você ainda consegue me surpreender. Obrigado por existir, por me escolher todos os dias e por fazer do 'nós' a melhor parte da minha vida. Eu te amo. Hoje, amanhã e em todos os 11 de junho que existirem. Quando você reler isso, anos depois, espero que eu ainda esteja ao seu lado rindo da mesma coisa. Do seu Enzo, pra sempre.",
+
+  roletaVerdade: [
+    "Qual foi o momento em que você percebeu que me amava?",
+    "Se pudesse reviver qualquer dia nosso, qual escolheria?",
+    "Qual é a lembrança mais boba (e mais fofa) que você tem de mim?",
+    "O que passou pela sua cabeça no nosso primeiro encontro?",
+    "De 0 a 10, quanto de certeza você tem que eu te amo?",
+    "Qual imagem minha sempre te faz sorrir à toa?",
+  ],
+  roletaDesafio: [
+    "Manda um áudio cantando \u2018Parab\u00e9ns pra voc\u00ea\u2019 do seu jeito.",
+    "Manda um selfie 'agora mesmo' com cara de feliz.",
+    "Fala 3 coisas que ama em mim olhando bem no olho.",
+    "Conta uma piada ruim e ainda ri dela.",
+    "Faz coraçãozinho com as mãos e manda foto.",
+    "Escolhe o próximo lugar pra gente sair junto.",
+  ],
+
+  /* Playlist do nosso amor — coloque os títulos, artistas e links (YouTube) de vocês.
+     Dica: em "youtube", cole o código do vídeo (o que vem depois de watch?v=) pra tocar direto aqui no site. */
   playlist: [
-    { titulo: "Nossa música 1", artista: "nome do artista", link: "" },
-    { titulo: "Nossa música 2", artista: "nome do artista", link: "" },
-    { titulo: "Nossa música 3", artista: "nome do artista", link: "" },
-    { titulo: "Nossa música 4", artista: "nome do artista", link: "" },
+    { titulo: "Nossa música 1", artista: "nome do artista", link: "", youtube: "" },
+    { titulo: "Nossa música 2", artista: "nome do artista", link: "", youtube: "" },
+    { titulo: "Nossa música 3", artista: "nome do artista", link: "", youtube: "" },
+    { titulo: "Nossa música 4", artista: "nome do artista", link: "", youtube: "" },
   ],
 };
 
@@ -1536,14 +1726,34 @@ function marcarMapa(id) {
         <div class="titulo">${m.titulo}</div>
         <div class="artista">${m.artista}</div>
       </div>
+      ${m.youtube ? `<button class="tocar-aqui">tocar aqui</button>` : ""}
       <button class="ouvir">ouvir</button>`;
-    el.querySelector(".ouvir").addEventListener("click", () => {
-      const url = m.link ||
-        "https://www.youtube.com/results?search_query=" +
-        encodeURIComponent(m.titulo + " " + m.artista);
-      window.open(url, "_blank");
-    });
-    lista.appendChild(el);
+
+    if (m.youtube) {
+      const id = m.youtube;
+      const iframe = document.createElement("iframe");
+      iframe.className = "player-musica";
+      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.title = m.titulo;
+      iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0";
+      el.querySelector(".tocar-aqui").addEventListener("click", () => {
+        const abrindo = iframe.style.display !== "block";
+        iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0" +
+          (abrindo ? "&autoplay=1" : "");
+        iframe.style.display = abrindo ? "block" : "none";
+      });
+      lista.appendChild(el);
+      lista.appendChild(iframe);
+    } else {
+      el.querySelector(".ouvir").addEventListener("click", () => {
+        const url = m.link ||
+          "https://www.youtube.com/results?search_query=" +
+          encodeURIComponent(m.titulo + " " + m.artista);
+        window.open(url, "_blank");
+      });
+      lista.appendChild(el);
+    }
   });
 })();
 
@@ -1557,6 +1767,125 @@ function marcarMapa(id) {
     scrollTo({ top: 0, behavior: "smooth" });
   });
 })();
+
+/* ================= BALOES DE ANIVERSARIO ================= */
+(function criarBaloes() {
+  const pai = document.getElementById("baloes");
+  const cores = ["#ff6da0", "#ff4d8d", "#ffb3cc", "#e8b75a", "#b9a0ff", "#ff8fb3", "#ff9f4d", "#a7d8ff"];
+  for (let i = 0; i < 9; i++) {
+    const b = document.createElement("span");
+    b.className = "balao";
+    const t = Math.random() * 80 + 55;
+    b.style.left = Math.random() * 100 + "%";
+    b.style.setProperty("--t", t + "px");
+    b.style.background = cores[i % cores.length];
+    b.style.animationDuration = (Math.random() * 16 + 15) + "s";
+    b.style.animationDelay = (Math.random() * 14) + "s";
+    pai.appendChild(b);
+  }
+})();
+
+/* ================= TRAVA DE DESBLOQUEIO ================= */
+function normalizar(s) { return s.toLowerCase().replace(/[^0-9a-z]/g, ""); }
+
+(function iniciarTrava() {
+  const trava = document.getElementById("trava");
+  const input = document.getElementById("inputTrava");
+  let desbloqueado = false;
+  try { desbloqueado = localStorage.getItem("bsiteDesbloqueado") === "1"; } catch (e) {}
+
+  if (desbloqueado) { trava.remove(); return; }
+  trava.hidden = false;
+
+  function aceitar() {
+    desbloqueado = true;
+    try { localStorage.setItem("bsiteDesbloqueado", "1"); } catch (e) {}
+    trava.classList.add("some");
+    document.body.style.overflow = "";
+    setTimeout(() => trava.remove(), 900);
+    iniciarConfete(90);
+    if (window.fogosDeArtificio) window.fogosDeArtificio(4500);
+  }
+
+  function checar() {
+    const v = normalizar(input.value);
+    const aceitas = ["11062025", "110625", "11dejunho", "11dejunhode2025"];
+    if (aceitas.includes(v)) {
+      document.getElementById("travaErro").textContent = "";
+      aceitar();
+    } else {
+      document.getElementById("travaErro").textContent = "hmm, não é essa... tenta de novo com carinho";
+      input.select();
+    }
+  }
+
+  document.getElementById("botaoTrava").addEventListener("click", checar);
+  input.addEventListener("keydown", (e) => { if (e.key === "Enter") checar(); });
+  document.getElementById("botaoDica").addEventListener("click", () => {
+    document.getElementById("travaDica").hidden = false;
+  });
+  document.body.style.overflow = "hidden";
+})();
+
+/* ================= CARTA SECRETA (easter egg) ================= */
+(function cartaSecreta() {
+  const btn = document.getElementById("coracaoSecreto");
+  const modal = document.getElementById("cartaSecreta");
+  document.getElementById("textoCartaSecreta").textContent = CONFIG.cartaSecreta;
+  let toques = 0;
+
+  function fecharMod(m) {
+    m.classList.remove("aberta");
+    if (!document.querySelector(".modal-camada.aberta")) document.body.style.overflow = "";
+  }
+
+  btn.addEventListener("click", () => {
+    toques++;
+    btn.classList.remove("estremecendo");
+    void btn.offsetWidth;
+    btn.classList.add("estremecendo");
+    if (toques >= 3) {
+      toques = 0;
+      modal.classList.add("aberta");
+      document.body.style.overflow = "hidden";
+    }
+  });
+  modal.querySelector(".fechar").addEventListener("click", () => fecharMod(modal));
+  modal.addEventListener("click", (e) => { if (e.target === modal) fecharMod(modal); });
+})();
+
+/* ================= QR CODE (abrir no celular) ================= */
+(function modalQR() {
+  const modal = document.getElementById("qrModal");
+  const urlSite = "https://zozoemimiewq.github.io/para-iasmim/";
+  document.getElementById("botaoQR").addEventListener("click", () => {
+    document.getElementById("imgQR").src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=440x440&data=" + encodeURIComponent(urlSite);
+    document.getElementById("textoQR").textContent = urlSite;
+    modal.classList.add("aberta");
+    document.body.style.overflow = "hidden";
+  });
+  modal.querySelector(".fechar").addEventListener("click", () => {
+    modal.classList.remove("aberta");
+    document.body.style.overflow = "";
+  });
+  modal.addEventListener("click", (e) => { if (e.target === modal) { modal.classList.remove("aberta"); document.body.style.overflow = ""; } });
+})();
+
+/* ================= ROLETA VERDADE OU BEIJO ================= */
+let ultimoSorteado = -1;
+function girarRoleta(tipo) {
+  const lista = tipo === "verdade" ? CONFIG.roletaVerdade : CONFIG.roletaDesafio;
+  let idx;
+  do { idx = Math.floor(Math.random() * lista.length); } while (lista.length > 1 && idx === ultimoSorteado);
+  ultimoSorteado = idx;
+  const palco = document.getElementById("palcoRoleta");
+  palco.classList.remove("gira");
+  void palco.offsetWidth;
+  palco.innerHTML =
+    `<span class="roleta-tag">${tipo === "verdade" ? "VERDADE" : "BEIJO (desafio)"}</span>` + lista[idx];
+  palco.classList.add("gira");
+}
 
 /* ================= MUSICA (Parabéns, versão piano) ================= */
 let ctx = null;
@@ -1582,18 +1911,24 @@ function criarAudio() {
 
 function tocarNota(freq, inicio, duracao) {
   const c = criarAudio();
-  const osc = c.createOscillator();
-  const gain = c.createGain();
-  osc.type = "sine";
-  osc.frequency.value = freq;
   const t0 = inicio;
-  gain.gain.setValueAtTime(0.0001, t0);
-  gain.gain.exponentialRampToValueAtTime(0.22, t0 + 0.02);
-  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duracao * 0.9);
-  osc.connect(gain);
-  gain.connect(c.destination);
-  osc.start(t0);
-  osc.stop(t0 + duracao);
+  const nota = function (f, tipo, ganho, atk, dec) {
+    const o = c.createOscillator();
+    const g = c.createGain();
+    o.type = tipo;
+    o.frequency.value = f;
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(ganho, t0 + (atk || 0.02));
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + duracao * (dec || 0.9));
+    o.connect(g);
+    g.connect(c.destination);
+    o.start(t0);
+    o.stop(t0 + duracao * 1.1);
+  };
+  // melodia principal + harmonia (oitava abaixo) + brilho (quinta acima)
+  nota(freq, "sine", 0.22, 0.02, 0.9);
+  nota(freq / 2, "triangle", 0.10, 0.05, 0.95);
+  nota(freq * 1.5, "sine", 0.04, 0.03, 0.7);
 }
 
 function agendarPartitura() {
