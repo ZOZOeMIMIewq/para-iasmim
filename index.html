@@ -769,7 +769,14 @@
     font-size: .85rem; cursor: pointer; flex: none; transition: transform .15s, background .15s;
   }
   .musica .tocar-aqui:hover { background: rgba(255, 77, 141, .08); transform: scale(1.05); }
-  .player-musica { width: 100%; aspect-ratio: 16 / 9; max-height: 240px; border: none; border-radius: 12px; margin-top: 10px; display: none; }
+  .caixa-player { display: none; margin-top: 16px; position: relative; }
+  .caixa-player.aberta { display: block; }
+  .caixa-player .player-playlist { width: 100%; aspect-ratio: 16 / 9; max-height: 300px; border: none; border-radius: 14px; display: block; }
+  .caixa-player .fechar-player {
+    position: absolute; top: -12px; right: 8px; width: 34px; height: 34px; border-radius: 50%;
+    border: none; background: var(--vinho); color: #fff; font-size: .9rem; cursor: pointer;
+    box-shadow: 0 6px 16px rgba(192,33,63,.35); z-index: 2;
+  }
 
   /* ================= CORACAO SECRETO ================= */
   #coracaoSecreto {
@@ -1909,9 +1916,32 @@ function marcarMapa(id) {
   atualizarMapaUI();
 })();
 
-/* ================= PLAYLIST ================= */
+/* ================= PLAYLIST (player único) ================= */
 (function montarPlaylist() {
   const lista = document.getElementById("listaPlaylist");
+
+  const caixa = document.createElement("div");
+  caixa.className = "caixa-player";
+  caixa.innerHTML = `
+    <button class="fechar-player" aria-label="Fechar player" title="Fechar player">&#10005;</button>
+    <iframe class="player-playlist" title="Player de música"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>`;
+  const iframe = caixa.querySelector("iframe");
+  const fechar = caixa.querySelector(".fechar-player");
+  fechar.addEventListener("click", () => {
+    caixa.classList.remove("aberta");
+    iframe.removeAttribute("src");
+  });
+  lista.appendChild(caixa);
+
+  function urlEmbed(id) { return "https://www.youtube-nocookie.com/embed/" + id + "?rel=0"; }
+  function urlVer(m) {
+    if (m.youtube) return "https://www.youtube.com/watch?v=" + m.youtube;
+    if (m.link) return m.link;
+    return "https://www.youtube.com/results?search_query=" + encodeURIComponent(m.titulo + " " + m.artista);
+  }
+
   CONFIG.playlist.forEach(m => {
     const el = document.createElement("div");
     el.className = "musica";
@@ -1925,30 +1955,16 @@ function marcarMapa(id) {
       <button class="ouvir">ouvir</button>`;
 
     if (m.youtube) {
-      const id = m.youtube;
-      const iframe = document.createElement("iframe");
-      iframe.className = "player-musica";
-      iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-      iframe.allowFullscreen = true;
-      iframe.title = m.titulo;
-      iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0";
       el.querySelector(".tocar-aqui").addEventListener("click", () => {
-        const abrindo = iframe.style.display !== "block";
-        iframe.src = "https://www.youtube-nocookie.com/embed/" + id + "?rel=0" +
-          (abrindo ? "&autoplay=1" : "");
-        iframe.style.display = abrindo ? "block" : "none";
+        iframe.src = urlEmbed(m.youtube) + "&autoplay=1";
+        caixa.classList.add("aberta");
+        caixa.scrollIntoView({ behavior: "smooth", block: "nearest" });
       });
-      lista.appendChild(el);
-      lista.appendChild(iframe);
-    } else {
-      el.querySelector(".ouvir").addEventListener("click", () => {
-        const url = m.link ||
-          "https://www.youtube.com/results?search_query=" +
-          encodeURIComponent(m.titulo + " " + m.artista);
-        window.open(url, "_blank");
-      });
-      lista.appendChild(el);
     }
+    el.querySelector(".ouvir").addEventListener("click", () => {
+      window.open(urlVer(m), "_blank", "noopener");
+    });
+    lista.appendChild(el);
   });
 })();
 
